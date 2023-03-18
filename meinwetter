@@ -1,0 +1,42 @@
+#! /usr/bin/bash
+#
+# meinwettter 1.0.0, 2023-03-18
+#
+# Versuch einer einfachen Abfrage des Wetters fuer deutsche Staedte.
+#
+# Bernd Storck, https://www.facebook.com/BStLinux/
+#
+
+# Berlin 62422
+# Hamburg 62782 
+
+ort="$1"
+while [ -z "$numbers" ];
+do
+  clear
+  if [ -z "$1" ]; then
+    echo -e "Bitte geben Sie den Namen eines Ortes ein!\n(\"x\", \"exit\" oder \"Ende\" für Abbruch.)\n"
+    read -rp "Eingabe: " ort
+    # echo "$ort"
+  fi
+
+  if [ "$ort" = "x" ] || [ "$ort" = "exit" ] || grep -i 'ende' <<< "$ort"; then
+    exit 0
+  fi  
+
+  numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "places-de" | cut -d, -f2)"
+  if [ -z "$numbers" ]; then
+    numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "regions-de" | cut -d, -f2)"
+  fi
+done
+# echo "$numbers"
+locationID="$numbers"
+
+curl -s "https://www.wetter.de/wetter/r/$locationID" |\
+  html2text -utf8                                    |\
+  grep -m1 -EB 999 '={4,}'                           |\
+  grep -F -A200 "Wetter $ort"                        |\
+  grep --color=never -E '[A-Z]+.{20,}'               |\
+  grep -v '^\[One of:'
+
+exit 0
