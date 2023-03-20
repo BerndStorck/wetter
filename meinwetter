@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 #
-# meinwettter 1.0.0, 2023-03-18
+# meinwettter 1.1.0, 2023-03-18, 2023-03-20
 #
 # Versuch einer einfachen Abfrage des Wetters fuer deutsche Staedte.
 #
@@ -10,7 +10,50 @@
 # Berlin 62422
 # Hamburg 62782 
 
+
 ort="$1"
+
+
+function calc_average_centigrades {
+# Calculates the avagage temperature in degrees Celsius.
+
+  while read -r summand;
+  do
+    summe="$(( summe + summand ))"
+  done  <<< "$summanden"
+
+  divisor="$(wc -l <<< "$summanden")"
+
+  for calculator in dc bc qalc;
+  do
+    if command -v "$calculator" > /dev/null 2>&1; then
+      break
+    fi
+  done
+  case "$calculator" in
+    dc)
+      average_degrees="$( dc -e "2 k $summe $divisor / p" )"
+      ;;
+    bc)
+      average_degrees="$( bc <<< "scale=2; $summe / $divisor" )"
+      ;;
+    qalc)
+      average_degrees="$( qalc --terse "$summe" / "$divisor" )"
+      ;;
+    *)
+      average_degrees="$(( summe / divisor ))"
+  esac
+}
+
+
+function fetch_degrees {
+  summanden="$( grep -m1 -EA 999 '={4,}' <<< "$1" |\
+                grep -m1 -EB 999 '[*]{5}'         |\
+                sed -En '/^[0-9]+°/s/^([0-9]+)°/\1/p' 
+             )"
+}
+
+
 while [ -z "$numbers" ];
 do
   clear
@@ -29,14 +72,19 @@ do
     numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "regions-de" | cut -d, -f2)"
   fi
 done
-# echo "$numbers"
+
 locationID="$numbers"
 
-curl -s "https://www.wetter.de/wetter/r/$locationID" |\
-  html2text -utf8                                    |\
-  grep -m1 -EB 999 '={4,}'                           |\
-  grep -F -A200 "Wetter $ort"                        |\
-  grep --color=never -E '[A-Z]+.{20,}'               |\
+weather_data="$(curl -s "https://www.wetter.de/wetter/r/$locationID" | html2text -utf8)"
+
+echo "$weather_data"                   |\
+  grep -m1 -EB 999 '={4,}'             |\
+  grep -F -A200 "Wetter $ort"          |\
+  grep --color=never -E '[A-Z]+.{20,}' |\
   grep -v '^\[One of:'
+
+fetch_degrees "$weather_data"
+calc_average_centigrades
+echo "Durchschnittliche Temperatur: $average_degrees"
 
 exit 0
