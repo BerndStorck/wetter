@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 #
-# meinwettter 1.1.0, 2023-03-18, 2023-03-20
+# meinwettter 1.1.1, 2023-03-18, 2023-03-20
 #
 # Versuch einer einfachen Abfrage des Wetters fuer deutsche Staedte.
 #
@@ -11,7 +11,7 @@
 # Hamburg 62782 
 
 
-ort="$1"
+ort="$*"
 
 
 function calc_average_centigrades {
