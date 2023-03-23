@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 #
-# meinwettter 1.1.1, 2023-03-18, 2023-03-20
+# meinwettter 1.2.0, 2023-03-18, 2023-03-20, 2023-03-21, 2023-03-23
 #
 # Versuch einer einfachen Abfrage des Wetters fuer deutsche Staedte.
 #
@@ -8,21 +8,35 @@
 #
 
 # Berlin 62422
-# Hamburg 62782 
-
+# Hamburg 62782
 
 ort="$*"
+# ort="$(sed -E 's:(\()(.+)(\)):\\\1\2\\\3:g' <<< "$*")"  ## "Frankfurt (Oder)"
+# echo "$ort"
+
+if [ -r places-de ] && [ -r regions-de ]; then  ## Localisation of data files:
+  dataDir="$(pwd)"
+elif [ -r "$HOME/.local/share/meinwetter/places-de" ] && [ -r "$HOME/.local/share/meinwetter/./regions-de" ]; then
+  dataDir="$HOME/.local/share/meinwetter/"
+elif [ -r "/usr/local/share/places-de" ] && [ -r "/usr/local/share/regions-de" ]; then
+  dataDir="/usr/local/share/meinwetter/"
+fi
+
+placesFile="${dataDir}places-de"
+regionsFile="${dataDir}regions-de"
 
 
 function calc_average_centigrades {
 # Calculates the avagage temperature in degrees Celsius.
 
-  while read -r summand;
+  last=$(( "${#temperatures[@]}" - 1 ))  ## Index value of last array element.
+  for (( i=0; i<=last; i++ ))
   do
+    summand="${temperatures[$i]}"
     summe="$(( summe + summand ))"
-  done  <<< "$summanden"
+  done
 
-  divisor="$(wc -l <<< "$summanden")"
+  divisor="$(( last + 1 ))"
 
   for calculator in dc bc qalc;
   do
@@ -46,17 +60,48 @@ function calc_average_centigrades {
 }
 
 
+function fetch_times_with_degrees {
+  times_with_degrees="$( grep -m1 -EA 999 '={4,}' <<< "$1" |\
+                         grep -m1 -EB 999 '[*]{5}'         |\
+                         sed -En '/^[0-9]{2}:[0-9]{2}/{
+                           N
+                           {s/\n/,/}
+                           p
+                         }'
+                       )"  ## Concatenates 2 lines with N.
+
+  i=0
+  for data in $times_with_degrees
+  do
+    if grep -sq '°$' <<< "$data"; then  ## Get pairs of time and degree.
+      time="$(cut -d',' -f1 <<< "$data")"
+      degree="$(cut -d',' -f2 <<< "$data" | grep -Eo '^[0-9]+')"
+      array[$i]="$time-$degree"
+      (( i = i + 1 ))
+    elif grep '↓$' <<< "$data"; then   ## Get sunset.
+      sunset="$(cut -d',' -f1 <<< "$data")"
+    fi
+  done
+}
+
+
 function fetch_degrees {
-  summanden="$( grep -m1 -EA 999 '={4,}' <<< "$1" |\
-                grep -m1 -EB 999 '[*]{5}'         |\
-                sed -En '/^[0-9]+°/s/^([0-9]+)°/\1/p' 
-             )"
+  if [ -z "$times_with_degrees" ]; then
+    fetch_times_with_degrees "$1"
+  fi
+
+  last=$(( "${#array[@]}" - 1 ))  ## Index value of last array element.
+  for (( i=0; i<=last; i++ ))
+  do
+    temperatures[$i]="$(cut -d'-' -f2 <<< "${array[$i]}")"
+  done
+
+# echo -ne "Summanden:\n$summanden" | cat -A
 }
 
 
 while [ -z "$numbers" ];
 do
-  clear
   if [ -z "$1" ]; then
     echo -e "Bitte geben Sie den Namen eines Ortes ein!\n(\"x\", \"exit\" oder \"Ende\" für Abbruch.)\n"
     read -rp "Eingabe: " ort
@@ -65,26 +110,31 @@ do
 
   if [ "$ort" = "x" ] || [ "$ort" = "exit" ] || grep -i 'ende' <<< "$ort"; then
     exit 0
-  fi  
+  fi
 
-  numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "places-de" | cut -d, -f2)"
+# numbers="$(grep -m1 "^$ort," "$placesFile" | cut -d, -f2)"  ## Versuch zu "Frankfurt (Oder)"
+  numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$placesFile" | cut -d, -f2)"
   if [ -z "$numbers" ]; then
-    numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "regions-de" | cut -d, -f2)"
+    numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$regionsFile" | cut -d, -f2)"
   fi
 done
 
 locationID="$numbers"
 
-weather_data="$(curl -s "https://www.wetter.de/wetter/r/$locationID" | html2text -utf8)"
+weather_data="$(curl -s "https://www.wetter.de/wetter/r/$locationID" | html2text -utf8 -width 111)"
 
+echo "====== Das Wetter in $ort ======"
 echo "$weather_data"                   |\
   grep -m1 -EB 999 '={4,}'             |\
   grep -F -A200 "Wetter $ort"          |\
   grep --color=never -E '[A-Z]+.{20,}' |\
-  grep -v '^\[One of:'
+  grep -Ev "^\[One of:|$ort"
 
 fetch_degrees "$weather_data"
 calc_average_centigrades
-echo "Durchschnittliche Temperatur: $average_degrees"
+echo "Durchschnittliche Temperatur: $average_degrees °C"
+if [ "$sunset" != "" ]; then
+  echo "Sonnenuntergang: \"$sunset\" Uhr"
+fi  
 
 exit 0
