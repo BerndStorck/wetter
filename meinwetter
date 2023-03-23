@@ -78,7 +78,9 @@ function fetch_times_with_degrees {
       degree="$(cut -d',' -f2 <<< "$data" | grep -Eo '^[0-9]+')"
       times_with_degrees[$i]="$time-$degree"
       (( i = i + 1 ))
-    elif grep '↓$' <<< "$data"; then   ## Get sunset.
+    elif grep -s '↑$' <<< "$data" > /dev/null; then   ## Get sunrise.
+      sunrise="$(cut -d',' -f1 <<< "$data")"
+    elif grep -s '↓$' <<< "$data" > /dev/null; then   ## Get sunset.
       sunset="$(cut -d',' -f1 <<< "$data")"
     fi
   done
@@ -133,7 +135,7 @@ done
 
 locationID="$numbers"
 
-weather_data="$(curl -s "https://www.wetter.de/wetter/r/$locationID" | html2text -utf8 -width 111)"
+weather_data="$(curl -s "https://www.wetter.de/wetter/r/$locationID" | tee html-download | html2text -utf8 -width 111)"
 
 echo "====== Das Wetter in $ort ======"
 echo "$weather_data"                   |\
@@ -146,8 +148,13 @@ fetch_degrees "$weather_data"
 calc_average_centigrades
 echo -n "Aktuelle Temperatur: $(cut -d',' -f2 <<< "${temperatures[0]}") °C / " 
 echo "Durchschnittliche Temperatur: $average_degrees °C"
-if [ "$sunset" != "" ]; then
-  echo "Sonnenuntergang: \"$sunset\" Uhr"
+if [ "$sunrise" != "" ]; then
+  sun_info="Sonnenaufgang: $sunrise Uhr"
+  [ "$sunset" != "" ] && sun_info="${sun_info} / " 
 fi  
+if [ "$sunset" != "" ]; then
+  sun_info="${sun_info}Sonnenuntergang: $sunset Uhr"
+fi  
+echo "$sun_info"
 
 exit 0
