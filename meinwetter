@@ -86,7 +86,7 @@ function fetch_times_with_degrees {
 
 
 function fetch_degrees {
-  if [ -z "$times_with_following_line" ]; then
+  if [ -z "$times_and_following_line" ]; then
     fetch_times_with_degrees "$1"
   fi
 
@@ -99,6 +99,7 @@ function fetch_degrees {
 # echo -ne "Summanden:\n$summanden" | cat -A
 }
 
+matching_input=0
 cancel_info="\n(\"x\", \"exit\" oder \"Ende\" für Abbruch.)"
 while [ -z "$numbers" ];
 do
@@ -107,7 +108,7 @@ do
   else
     prompt="Bitte geben Sie einen anderen Ortsnamen ein!"
   fi  
-  if [ -z "$1" ]; then
+  if [ -z "$1" ] || [ "$matching_input" -ne 0 ]; then
     echo -e "${prompt}$cancel_info"
     read -rp "Eingabe: " ort
     # echo "$ort"
@@ -123,8 +124,10 @@ do
     numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$regionsFile" | cut -d, -f2)"
   fi
   if [ -z "$numbers" ]; then
-    echo -ne "\n$ort kann nicht zugeordnet werden.\n"
+    echo -ne "\n\"$ort\" kann nicht zugeordnet werden.\n"
     matching_input=1
+  else
+    matching_input=0    
   fi
 done
 
