@@ -7,6 +7,16 @@
 # Bernd Storck, https://www.facebook.com/BStLinux/
 #
 
+if ! command -v html2text; then
+  for i in apt apt-get aptitude;
+  do 
+    eval "sudo $i install html2text"
+    if [ "$?" = "0" ]; then
+      break
+    fi
+  done
+fi
+  
 echo -e "\nDateninstallation für das Programm \"meinwetter\".\n"
 sudo true
 echo "Die Datendateien werden jetzt ins Verzeichnis \"/usr/local/share\" kopiert:"
