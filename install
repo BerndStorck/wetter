@@ -1,0 +1,14 @@
+#! /usr/bin/bash
+#
+# install 1.0.0, 2023-03-22
+#
+# Installiert die Datendateien fuer das Skript "meinwetter".
+#
+# Bernd Storck, https://www.facebook.com/BStLinux/
+#
+
+echo -e "\nDateninstallation für das Programm \"meinwetter\".\n"
+sudo true
+echo "Die Datendateien werden jetzt ins Verzeichnis \"/usr/local/share\" kopiert:"
+sudo mkdir -p /usr/local/share/meinwetter
+sudo cp ./places* ./regions* /usr/local/share/meinwetter
