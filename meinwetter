@@ -15,7 +15,7 @@ ort="$*"
 # echo "$ort"
 
 if [ -r places-de ] && [ -r regions-de ]; then  ## Localisation of data files:
-  dataDir="$(pwd)"
+  dataDir="$(pwd)/"
 elif [ -r "$HOME/.local/share/meinwetter/places-de" ] && [ -r "$HOME/.local/share/meinwetter/./regions-de" ]; then
   dataDir="$HOME/.local/share/meinwetter/"
 elif [ -r "/usr/local/share/places-de" ] && [ -r "/usr/local/share/regions-de" ]; then
@@ -61,22 +61,22 @@ function calc_average_centigrades {
 
 
 function fetch_times_with_degrees {
-  times_with_degrees="$( grep -m1 -EA 999 '={4,}' <<< "$1" |\
-                         grep -m1 -EB 999 '[*]{5}'         |\
-                         sed -En '/^[0-9]{2}:[0-9]{2}/{
-                           N
-                           {s/\n/,/}
-                           p
-                         }'
-                       )"  ## Concatenates 2 lines with N.
+  times_and_following_line="$( grep -m1 -EA 999 '={4,}' <<< "$1" |\
+                               grep -m1 -EB 999 '[*]{5}'         |\
+                               sed -En '/^[0-9]{2}:[0-9]{2}/{
+                                 N
+                                 {s/\n/,/}
+                                 p
+                               }'
+                             )"  ## Concatenates 2 lines with N.
 
   i=0
-  for data in $times_with_degrees
+  for data in $times_and_following_line
   do
     if grep -sq '°$' <<< "$data"; then  ## Get pairs of time and degree.
       time="$(cut -d',' -f1 <<< "$data")"
       degree="$(cut -d',' -f2 <<< "$data" | grep -Eo '^[0-9]+')"
-      array[$i]="$time-$degree"
+      times_with_degrees[$i]="$time-$degree"
       (( i = i + 1 ))
     elif grep '↓$' <<< "$data"; then   ## Get sunset.
       sunset="$(cut -d',' -f1 <<< "$data")"
@@ -86,14 +86,14 @@ function fetch_times_with_degrees {
 
 
 function fetch_degrees {
-  if [ -z "$times_with_degrees" ]; then
+  if [ -z "$times_with_following_line" ]; then
     fetch_times_with_degrees "$1"
   fi
 
-  last=$(( "${#array[@]}" - 1 ))  ## Index value of last array element.
+  last=$(( "${#times_with_degrees[@]}" - 1 ))  ## Index value of last array element.
   for (( i=0; i<=last; i++ ))
   do
-    temperatures[$i]="$(cut -d'-' -f2 <<< "${array[$i]}")"
+    temperatures[$i]="$(cut -d'-' -f2 <<< "${times_with_degrees[$i]}")"
   done
 
 # echo -ne "Summanden:\n$summanden" | cat -A
@@ -132,6 +132,7 @@ echo "$weather_data"                   |\
 
 fetch_degrees "$weather_data"
 calc_average_centigrades
+echo -n "Aktuelle Temperatur: $(cut -d',' -f2 <<< "${temperatures[0]}") °C / " 
 echo "Durchschnittliche Temperatur: $average_degrees °C"
 if [ "$sunset" != "" ]; then
   echo "Sonnenuntergang: \"$sunset\" Uhr"
