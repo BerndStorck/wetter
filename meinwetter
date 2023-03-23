@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 #
-# meinwettter 1.2.0, 2023-03-18, 2023-03-20, 2023-03-21, 2023-03-23
+# meinwettter 1.2.2, 2023-03-18, 2023-03-20, 2023-03-21, 2023-03-23
 #
 # Versuch einer einfachen Abfrage des Wetters fuer deutsche Staedte.
 #
@@ -99,16 +99,21 @@ function fetch_degrees {
 # echo -ne "Summanden:\n$summanden" | cat -A
 }
 
-
+cancel_info="\n(\"x\", \"exit\" oder \"Ende\" für Abbruch.)"
 while [ -z "$numbers" ];
 do
+  if [ "$matching_input" -ne 1 ]; then
+    prompt="Bitte geben Sie den Namen eines Ortes ein!"
+  else
+    prompt="Bitte geben Sie einen anderen Ortsnamen ein!"
+  fi  
   if [ -z "$1" ]; then
-    echo -e "Bitte geben Sie den Namen eines Ortes ein!\n(\"x\", \"exit\" oder \"Ende\" für Abbruch.)\n"
+    echo -e "${prompt}$cancel_info"
     read -rp "Eingabe: " ort
     # echo "$ort"
   fi
 
-  if [ "$ort" = "x" ] || [ "$ort" = "exit" ] || grep -i 'ende' <<< "$ort"; then
+  if [ "$ort" = "x" ] || [ "$ort" = "exit" ] || grep -i 'ende' <<< "$ort" || [ "$ort" = "q" ] || [ "$ort" = "quit" ]; then
     exit 0
   fi
 
@@ -116,6 +121,10 @@ do
   numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$placesFile" | cut -d, -f2)"
   if [ -z "$numbers" ]; then
     numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$regionsFile" | cut -d, -f2)"
+  fi
+  if [ -z "$numbers" ]; then
+    echo -ne "\n$ort kann nicht zugeordnet werden.\n"
+    matching_input=1
   fi
 done
 
