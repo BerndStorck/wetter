@@ -1,5 +1,5 @@
-,27021
-,59418
+@,27021
+@,59418
 Gustenfelden,61822
 Merching,61873
 Kefermarkt,61894
@@ -14,7 +14,7 @@ Breslau,62128
 München,62215
 Thüringen,62339
 Baden-Württemberg,62340
-,62341
+@,62341
 NRW,62343
 Baden-Württemberg,62344
 Sachsen,62345
@@ -37,13 +37,13 @@ Rheinland-Pfalz,62362
 Mecklenburg-Vorpommern,62363
 Brandenburg,62364
 Thüringen,62365
-,62366
+@,62366
 Rheinland-Pfalz,62367
 Hessen,62368
 Brandenburg,62369
 Thüringen,62370
 Bayern,62371
-,62372
+@,62372
 NRW,62373
 Bayern,62374
 Brandenburg,62376
@@ -89,7 +89,7 @@ NRW,62417
 Niedersachsen,62418
 Thüringen,62419
 NRW,62420
-,62422
+@,62422
 NRW,62423
 Thüringen,62424
 Sachsen-Anhalt,62425
@@ -123,7 +123,7 @@ Thüringen,62462
 Bayern,62464
 Bayern,62465
 Saarland,62466
-,62467
+@,62467
 Thüringen,62468
 Bayern,62469
 Brandenburg,62470
@@ -153,7 +153,7 @@ Bayern,62498
 NRW,62499
 Thüringen,62500
 Sachsen-Anhalt,62502
-,62504
+@,62504
 Brandenburg,62505
 NRW,62508
 Niedersachsen,62510
@@ -196,7 +196,7 @@ Bayern,62554
 NRW,62555
 Bayern,62556
 Niedersachsen,62558
-,62559
+@,62559
 Bayern,62561
 Niedersachsen,62562
 Hessen,62563
@@ -237,11 +237,11 @@ Sachsen-Anhalt,62602
 Baden-Württemberg,62603
 Thüringen,62604
 NRW,62606
-,62607
+@,62607
 Niedersachsen,62608
 Bayern,62609
 Rheinland-Pfalz,62610
-,62611
+@,62611
 Niedersachsen,62613
 Bayern,62614
 Rheinland-Pfalz,62615
@@ -276,7 +276,7 @@ NRW,62646
 Niedersachsen,62647
 Niedersachsen,62648
 Sachsen,62649
-,62650
+@,62650
 Saarland,62651
 Rheinland-Pfalz,62652
 Rheinland-Pfalz,62653
@@ -333,7 +333,7 @@ NRW,62713
 Hessen,62715
 Baden-Württemberg,62716
 Bayern,62717
-,62718
+@,62718
 Rheinland-Pfalz,62719
 Bayern,62720
 Baden-Württemberg,62721
@@ -365,7 +365,7 @@ Baden-Württemberg,62750
 Baden-Württemberg,62751
 Pirna,62752
 Frankreich,62753
-,62761
+@,62761
 Niedersachsen,62762
 Niedersachsen,62764
 Bayern,62765
@@ -373,13 +373,13 @@ Niedersachsen,62766
 NRW,62767
 Baden-Württemberg,62768
 NRW,62770
-,62771
+@,62771
 Bayern,62772
 Niedersachsen,62773
 Bayern,62778
 NRW,62779
 Bayern,62780
-,62782
+@,62782
 Sachsen,62785
 Gubacha,62814
 Auerbach in der Oberpfalz,62828
@@ -492,11 +492,11 @@ Lynn,63846
 Nußdorf ob der Traisen,63849
 Nußdorf ob der Traisen,63850
 Nußdorf ob der Traisen,63851
-,191645
-,1829065
-,2420744
-,2793104
-,5610766
+^@,191645
+^@,1829065
+^@,2420744
+^@,2793104
+^@,5610766
 Rheinland-Pfalz,940121
 Köln,940209
 Rheden,940541
