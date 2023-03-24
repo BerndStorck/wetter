@@ -135,7 +135,7 @@ done
 
 locationID="$numbers"
 
-weather_data="$(curl -s "https://www.wetter.de/wetter/r/$locationID" | tee html-download | html2text -utf8 -width 111)"
+weather_data="$(curl -s "https://www.wetter.de/wetter/r/$locationID" | html2text -utf8 -width 111)"
 
 echo "====== Das Wetter in $ort ======"
 echo "$weather_data"                   |\
