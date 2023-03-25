@@ -12,6 +12,10 @@ Das Programm wird entweder mit Angabe eines Ortsnamens oder ohne weitere Optione
 
 `./meinwetter Berlin`
 
+## Notwendige Voraussetzungen
+
+Das Programm "html2text" muss installiert sein.
+
 ## Empfehlenswerte Voraussetzung
 
 Ich empfehle eines der Programme dc, bc oder qalc zu installieren, weil nur damit die durchschnittliche Temperatur des aktuellen Tages genau berechnet werden kann!
