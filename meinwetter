@@ -10,6 +10,32 @@
 # Berlin 62422
 # Hamburg 62782
 
+
+## Constants: ############################
+PROG_NAME="Mein Wetter"
+ORIGINAL_SCRIPT_NAME="meinwetter"
+CURRENT_SCRIPT_NAME="${0##*/}"
+# TITLE="$CURRENT_SCRIPT_NAME"
+PROG_VERSION="1.2.3 / 2023-03-25 14:58:18"
+
+
+### SELF DOCUMENTATION: VERSION INFOS #########################
+case "$1" in
+  --version|-V)
+    echo -n "$CURRENT_SCRIPT_NAME ("
+    if [ "$CURRENT_SCRIPT_NAME" != "$ORIGINAL_SCRIPT_NAME" ]; then
+      echo -n "$PROG_NAME "
+    fi
+    echo "$PROG_VERSION)"
+    exit 0
+    ;;
+  -v|-\#)
+    echo "$PROG_VERSION"
+    exit 0
+    ;;
+esac
+
+
 ort="$*"
 # ort="$(sed -E 's:(\()(.+)(\)):\\\1\2\\\3:g' <<< "$*")"  ## "Frankfurt (Oder)"
 # echo "$ort"
