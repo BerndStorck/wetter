@@ -7,8 +7,8 @@
 # Bernd Storck, https://www.facebook.com/BStLinux/
 #
 
-function color_on  {	echo -en "\e[1;93m"; }
-function color_off { echo -en "\e[0;m";    }
+function color_on  { echo -en "\e[1;93m"; }
+function color_off { echo -en "\e[0;m";   }
 
 function shout {
   if [ "$1" = "-n" ]; then
@@ -62,8 +62,7 @@ check_and_install_prog "html2text"
 
 shout -n "Suche nach einem Rechenprogramm: "
 calculator_exists="false"  ## Non-existance as default.
-# for calculator in dc bc qalc;
-for calculator in dc qalc;
+for calculator in dc bc qalc;
 do
   if command -v "$calculator"; then
     calculator_exists="true"
