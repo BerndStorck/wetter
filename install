@@ -14,14 +14,14 @@ function shout {
   if [ "$1" = "-n" ]; then
     shift
     echo -en "\e[1;93m$1\e[0;m"
-  else    
+  else
     echo -e  "\e[1;93m$1\e[0;m"
   fi
 }
 
 function determine_installer {
     for installer in apt apt-get aptitude;
-    do 
+    do
       if command -v "$installer" > /dev/null; then
         break
       fi
@@ -36,9 +36,9 @@ function check_and_install_prog {
     echo "Das Programm \"$prog\" wird benötigt, ist aber noch nicht installiert."
     echo "Installation startet:"
     color_off
-    
+
     eval "sudo $installer install $prog"
-    
+
   fi
 }
 
@@ -74,13 +74,14 @@ if [ "$calculator_exists" = "false" ]; then
   shout "Kein Rechenprogramm gefunden!"
   install_calculator
 else
-  echo "Das Rechenprogramm $calculator steht schon bereit."   
+  echo "Das Rechenprogramm $calculator steht schon bereit."
 fi
-  
-exit
+
 
 echo -e "\nDateninstallation für das Programm \"meinwetter\".\n"
 sudo true
 echo "Die Datendateien werden jetzt ins Verzeichnis \"/usr/local/share\" kopiert:"
 sudo mkdir -p /usr/local/share/meinwetter
 sudo cp ./places-de ./regions-de /usr/local/share/meinwetter
+
+exit 0
