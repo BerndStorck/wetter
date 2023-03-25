@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 #
-# meinwettter 1.2.2, 2023-03-18, 2023-03-20, 2023-03-21, 2023-03-23
+# meinwettter 1.2.3, 2023-03-18, 2023-03-20, 2023-03-21, 2023-03-23, 2023-03-25
 #
 # Versuch einer einfachen Abfrage des Wetters fuer deutsche Staedte.
 #
@@ -38,9 +38,11 @@ function calc_average_centigrades {
 
   divisor="$(( last + 1 ))"
 
-  for calculator in dc bc qalc;
+  calculator=""
+  for i in dc bc qalc;
   do
-    if command -v "$calculator" > /dev/null 2>&1; then
+    if command -v "$i" > /dev/null 2>&1; then
+      calculator="$i"
       break
     fi
   done
@@ -109,7 +111,7 @@ do
     prompt="Bitte geben Sie den Namen eines Ortes ein!"
   else
     prompt="Bitte geben Sie einen anderen Ortsnamen ein!"
-  fi  
+  fi
   if [ -z "$1" ] || [ "$matching_input" -ne 0 ]; then
     echo -e "${prompt}$cancel_info"
     read -rp "Eingabe: " ort
@@ -129,7 +131,7 @@ do
     echo -ne "\n\"$ort\" kann nicht zugeordnet werden.\n"
     matching_input=1
   else
-    matching_input=0    
+    matching_input=0
   fi
 done
 
@@ -147,16 +149,16 @@ echo "$weather_data"                   |\
 fetch_degrees "$weather_data"
 calc_average_centigrades
 
-echo -n "Aktuelle Temperatur: $(cut -d',' -f2 <<< "${temperatures[0]}") °C / " 
+echo -n "Aktuelle Temperatur: $(cut -d',' -f2 <<< "${temperatures[0]}") °C / "
 echo "Durchschnittliche Temperatur: $average_degrees °C"
 
 if [ "$sunrise" != "" ]; then
   sun_info="Sonnenaufgang: $sunrise Uhr"
-  [ "$sunset" != "" ] && sun_info="${sun_info} / " 
-fi  
+  [ "$sunset" != "" ] && sun_info="${sun_info} / "
+fi
 if [ "$sunset" != "" ]; then
   sun_info="${sun_info}Sonnenuntergang: $sunset Uhr"
-fi  
+fi
 echo "$sun_info"
 
 exit 0
