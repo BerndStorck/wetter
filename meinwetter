@@ -146,8 +146,10 @@ echo "$weather_data"                   |\
 
 fetch_degrees "$weather_data"
 calc_average_centigrades
+
 echo -n "Aktuelle Temperatur: $(cut -d',' -f2 <<< "${temperatures[0]}") °C / " 
 echo "Durchschnittliche Temperatur: $average_degrees °C"
+
 if [ "$sunrise" != "" ]; then
   sun_info="Sonnenaufgang: $sunrise Uhr"
   [ "$sunset" != "" ] && sun_info="${sun_info} / " 
