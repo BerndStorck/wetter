@@ -7,18 +7,81 @@
 # Bernd Storck, https://www.facebook.com/BStLinux/
 #
 
-if ! command -v html2text; then
-  for i in apt apt-get aptitude;
-  do 
-    eval "sudo $i install html2text"
-    if [ "$?" = "0" ]; then
-      break
+function color_on  {	echo -en "\e[1;93m"; }
+function color_off { echo -en "\e[0;m";    }
+
+function shout {
+  if [ "$1" = "-n" ]; then
+    shift
+    echo -en "\e[1;93m$1\e[0;m"
+  else    
+    echo -e  "\e[1;93m$1\e[0;m"
+  fi
+}
+
+function determine_installer {
+    for installer in apt apt-get aptitude;
+    do 
+      if command -v "$installer" > /dev/null; then
+        break
+      fi
+    done
+}
+
+function check_and_install_prog {
+  prog="$1"
+  if ! command -v "$prog" > /dev/null; then
+
+    color_on
+    echo "Das Programm \"$prog\" wird benötigt, ist aber noch nicht installiert."
+    echo "Installation startet:"
+    color_off
+    
+    eval "sudo $installer install $prog"
+    
+  fi
+}
+
+function install_calculator {
+  PS3="Welches Rechenprogramm möchten Sie installieren? (1-3 oder 'exit'): "
+  select calculator in dc bc qalc exit
+  do
+    if [ "$REPLY" -ne 4 ]; then
+      color_on
+      echo "Installallation von $calculator startet:"
+      color_off
+      eval "sudo $installer install $calculator"
     fi
+    break
   done
+}
+
+determine_installer
+echo "installer is: $installer"
+check_and_install_prog "html2text"
+
+shout -n "Suche nach einem Rechenprogramm: "
+calculator_exists="false"  ## Non-existance as default.
+# for calculator in dc bc qalc;
+for calculator in dc qalc;
+do
+  if command -v "$calculator"; then
+    calculator_exists="true"
+    break
+  fi
+done
+
+if [ "$calculator_exists" = "false" ]; then
+  shout "Kein Rechenprogramm gefunden!"
+  install_calculator
+else
+  echo "Das Rechenprogramm $calculator steht schon bereit."   
 fi
   
+exit
+
 echo -e "\nDateninstallation für das Programm \"meinwetter\".\n"
 sudo true
 echo "Die Datendateien werden jetzt ins Verzeichnis \"/usr/local/share\" kopiert:"
 sudo mkdir -p /usr/local/share/meinwetter
-sudo cp ./places* ./regions* /usr/local/share/meinwetter
+sudo cp ./places-de ./regions-de /usr/local/share/meinwetter
