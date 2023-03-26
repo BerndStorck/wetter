@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 #
-# meinwettter 1.2.3, 2023-03-18, 2023-03-20, 2023-03-21, 2023-03-23, 2023-03-25
+# meinwettter 1.3.0, 2023-03-18, 2023-03-20, 2023-03-21, 2023-03-23, 2023-03-25, 2023-03-26
 #
 # Versuch einer einfachen Abfrage des Wetters fuer deutsche Staedte.
 #
@@ -149,9 +149,12 @@ do
   fi
 
 # numbers="$(grep -m1 "^$ort," "$placesFile" | cut -d, -f2)"  ## Versuch zu "Frankfurt (Oder)"
-  numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$placesFile" | cut -d, -f2)"
+# numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$placesFile" | cut -d, -f2)"
+  ## First alpabetic character in dataset ID leadign with "#" stands for a special database call.
+  numbers="$(grep -E -m1 "^$ort,([#][a-z])?[[:digit:]]+$" "$placesFile" | cut -d, -f2)"
   if [ -z "$numbers" ]; then
-    numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$regionsFile" | cut -d, -f2)"
+#   numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$regionsFile" | cut -d, -f2)"
+    numbers="$(grep -E -m1 "^$ort,([#][a-z])?[[:digit:]]+$" "$regionsFile" | cut -d, -f2)"
   fi
   if [ -z "$numbers" ]; then
     echo -ne "\n\"$ort\" kann nicht zugeordnet werden.\n"
@@ -161,9 +164,15 @@ do
   fi
 done
 
-locationID="$numbers"
+if [ "${numbers:0:1}" = "#" ]; then
+  db_ID="${numbers:1:1}"
+  locationID="${numbers:2}"
+else  
+  db_ID="r"
+  locationID="$numbers"
+fi
 
-weather_data="$(curl -s "https://www.wetter.de/wetter/r/$locationID" | html2text -utf8 -width 111)"
+weather_data="$(curl -s "https://www.wetter.de/wetter/${db_ID}/$locationID" | html2text -utf8 -width 111)"
 
 echo "====== Das Wetter in $ort ======"
 echo "$weather_data"                   |\
