@@ -48,7 +48,7 @@ ORIGINAL_SCRIPT_NAME="meinwetter"
 CURRENT_SCRIPT_NAME="${0##*/}"
 # TITLE="$CURRENT_SCRIPT_NAME"
 PROG_VERSION="1.4.0"
-VERSIONS_TIME_STAMP="2024-08-04, 06:15:59"  # date '+%Y-%m-%d, %T'
+VERSIONS_TIME_STAMP="2024-08-04, 07:07:22"  # date '+%Y-%m-%d, %T'
 
 
 # > Functions: < ============================================================
@@ -296,7 +296,7 @@ define_output_phrases () {
     exit_info="(\"x\", \"exit\" oder \"Ende\" für Abbruch.)"
     standard_prompt="Bitte geben Sie den Namen eines Ortes ein!"
     alternative_prompt="Bitte geben Sie einen anderen Ortsnamen ein!"
-    no_match="\"$ort\" kann nicht zugeordnet werden."
+    no_match="kann nicht zugeordnet werden."
     output_title="Das Wetter in"
     label_current_temperature="Aktuelle Temperatur"
     label_average_temperature="Durchschnittliche Temperatur"
@@ -310,7 +310,7 @@ define_output_phrases () {
     exit_info="\"x\", \"exit\" or \"quit\" for cancellation.)"
     standard_prompt="Please enter the name of a place or town!"
     alternative_prompt="Please enter another city name!"
-    no_match="\"$ort\" cannot be matched."
+    no_match="cannot be matched."
     output_title="The Weather in"
     label_current_temperature="Current temperature"
     label_average_temperature="Average temperature"
@@ -379,7 +379,7 @@ while [ -z "$numbers" ]; do
     numbers="$(grep -E -m1 "^$ort,([a-z])?[[:digit:]]+$" "$regionsFile" | cut -d, -f2)"
   fi
   if [ -z "$numbers" ]; then
-    echo -ne "\n${no_match}\n"
+    echo -ne "\n\"$ort\" ${no_match}\n"
     matching_input=1
   else
     matching_input=0
