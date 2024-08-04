@@ -1,63 +1,165 @@
-#! /usr/bin/bash
+#!/usr/bin/env bash
 #
-# meinwettter 1.3.0, 2023-03-18, 2023-03-20, 2023-03-21, 2023-03-23, 2023-03-25, 2023-03-26
+# meinwetter
+# Version: Look at the first constant definitions below!
 #
-# Versuch einer einfachen Abfrage des Wetters fuer deutsche Staedte.
+# Project Description:
+#   en: Query the weather for German cities. (Application, main program.)
+#   de: Abfrage des Wetters fuer deutsche Staedte. (Anwendung, Hauptprogramm.)
 #
-# Bernd Storck, https://www.facebook.com/BStLinux/
+# Usage:
+# ./meinwetter <location>
 #
+# Dependencies:
+# - html2text
+#
+# Author:    Bernd Storck
+# Contact:   https://www.facebook.com/BStLinux/
+#
+# History:   2023-03-18, 2023-03-20, 2023-03-21, 2023-03-23, 2023-03-25,
+#            2023-03-26, 2024-07-28, 2024-07-30, 2024-08-04
+#
+# Copyright: 2024, Bernd Storck
+# License:   GNU General Public License 3.0
+#
+
+
+# Functions in this script:
+#
+#  hilfe
+#  print_help
+#  data_files_readable
+#  calc_average_centigrades
+#  fetch_times_with_degrees
+#  fetch_degrees
+#  define_output_phrases
+
 
 # Berlin 62422
 # Hamburg 62782
 
 
-## Constants: ############################
-PROG_NAME="Mein Wetter"
+# > Value settings: < =======================================================
+
+# > Constants: < ------------------------------------------------------------
+
+PROG_NAME="MeinWetter"
 ORIGINAL_SCRIPT_NAME="meinwetter"
 CURRENT_SCRIPT_NAME="${0##*/}"
 # TITLE="$CURRENT_SCRIPT_NAME"
-PROG_VERSION="1.3.0 / 2023-03-26 13:18:23"
+PROG_VERSION="1.4.0"
+VERSIONS_TIME_STAMP="2024-08-04, 06:15:59"  # date '+%Y-%m-%d, %T'
 
 
-### SELF DOCUMENTATION: VERSION INFOS #########################
-case "$1" in
-  --version|-V)
-    echo -n "$CURRENT_SCRIPT_NAME ("
-    if [ "$CURRENT_SCRIPT_NAME" != "$ORIGINAL_SCRIPT_NAME" ]; then
-      echo -n "$PROG_NAME "
+# > Functions: < ============================================================
+
+hilfe () {
+ echo -e "\n $PROG_NAME ($PROG_VERSION)
+
+ Wenn \"datei\" der Name einer Textdatei ist, dann extrahiert der Befehl
+ \"sample 200 datei\" 200 Zeilen aus \"datei\" und schreibt sie in eine
+ Datei namens \"samples.txt\".
+
+ Das Skript wurde erstellt, um die Struktur der Datensätze in einer
+ Flat-File-Datenbank mit ca. 200000 Datensätzen zu untersuchen.
+
+ AUFRUF
+\t$CURRENT_SCRIPT_NAME <WIE_VIELE_ZEILEN_EXTRAHIEREN> <NAME_DER_EINGABEDATEI>
+
+ BEISPIEL
+\t$CURRENT_SCRIPT_NAME 200 dictverbs.txt\n"
+
+}
+
+
+print_help () {
+ echo -e "\n $PROG_NAME ($PROG_VERSION)
+
+ If \"file1\" is the name of an text file, than the command
+ \"sample 200 file1\" will extract 200 lines from file1 and
+ write them to a file named \"samples.txt\".
+
+ The script was build to study the structure of the data
+ records of a flat file database with about 200000 records.
+
+ CALL
+\t$CURRENT_SCRIPT_NAME <GET_HOW_MANY_LINES> <NAME_OF_INPUT_FILE>
+
+ EXAMPLE
+\tCURRENT_SCRIPT_NAME 200 dictverbs.txt\n"
+
+}
+
+
+call_self_documentation () {
+# Display help and version infos.
+#
+  case "$1" in
+    --hilf|-hilf|--hilfe)
+        hilfe
+        exit 0
+        ;;
+    --help|-h)
+        if [ "${LANG:0:2}" != "de" ]; then
+          print_help
+        else
+          hilfe
+        fi
+        exit 0
+        ;;
+    --version|-V)
+        echo -n "$CURRENT_SCRIPT_NAME ("
+        if [ "$CURRENT_SCRIPT_NAME" != "$ORIGINAL_SCRIPT_NAME" ]; then
+          echo -n "$PROG_NAME "
+        fi
+        echo "$PROG_VERSION)"
+        exit 0
+        ;;
+    -v|-\#)
+        echo "$PROG_VERSION"
+        exit 0
+        ;;
+  esac
+}
+
+
+data_files_readable () {
+# Locates the necessary data files ('places-de' and 'regions-de')
+# in predefined directories and returns 0 if both files are found;
+# otherwise, it returns 1.
+#
+    local dataDir
+    local directories=(
+        "$(pwd)/"
+        "$HOME/.local/share/meinwetter/"
+        "/usr/local/share/"
+    )
+
+    # Lokalisierung des Datenverzeichnisses:
+    for directory in "${directories[@]}"; do
+      if [ -r "${directory}places-de" ] && [ -r "${directory}regions-de" ]; then
+        dataDir="$directory"
+        break
+      fi
+    done
+
+    if [ -n "$dataDir" ]; then  # Definition der Datendateien:
+        placesFile="${dataDir}places-de"
+        regionsFile="${dataDir}regions-de"
+        return 0  # Erfolg
+    else
+        echo "FEHLER: Datenverzeichnis nicht gefunden." 2> /dev/stderr
+        echo "Die erforderlichen Dateien 'places-de' und 'regions-de' wurden nicht gefunden." >&2
+        return 1  # Fehler
     fi
-    echo "$PROG_VERSION)"
-    exit 0
-    ;;
-  -v|-\#)
-    echo "$PROG_VERSION"
-    exit 0
-    ;;
-esac
+}
 
 
-ort="$*"
-# ort="$(sed -E 's:(\()(.+)(\)):\\\1\2\\\3:g' <<< "$*")"  ## "Frankfurt (Oder)"
-# echo "$ort"
-
-if [ -r places-de ] && [ -r regions-de ]; then  ## Localisation of data files:
-  dataDir="$(pwd)/"
-elif [ -r "$HOME/.local/share/meinwetter/places-de" ] && [ -r "$HOME/.local/share/meinwetter/./regions-de" ]; then
-  dataDir="$HOME/.local/share/meinwetter/"
-elif [ -r "/usr/local/share/places-de" ] && [ -r "/usr/local/share/regions-de" ]; then
-  dataDir="/usr/local/share/meinwetter/"
-fi
-
-placesFile="${dataDir}places-de"
-regionsFile="${dataDir}regions-de"
-
-
-function calc_average_centigrades {
+calc_average_centigrades () {
 # Calculates the avagage temperature in degrees Celsius.
 
-  last=$(( "${#temperatures[@]}" - 1 ))  ## Index value of last array element.
-  for (( i=0; i<=last; i++ ))
-  do
+  last=$(( "${#temperatures[@]}" - 1 ))  # Index value of last array element.
+  for (( i=0; i<=last; i++ )); do
     summand="${temperatures[$i]}"
     summe="$(( summe + summand ))"
   done
@@ -65,8 +167,7 @@ function calc_average_centigrades {
   divisor="$(( last + 1 ))"
 
   calculator=""
-  for i in dc bc qalc;
-  do
+  for i in dc bc qalc; do
     if command -v "$i" > /dev/null 2>&1; then
       calculator="$i"
       break
@@ -88,55 +189,175 @@ function calc_average_centigrades {
 }
 
 
-function fetch_times_with_degrees {
-  times_and_following_line="$( grep -m1 -EA 999 '={4,}' <<< "$1" |\
-                               grep -m1 -EB 999 '[*]{5}'         |\
-                               sed -En '/^[0-9]{2}:[0-9]{2}/{
-                                 N
-                                 {s/\n/,/}
-                                 p
-                               }'
-                             )"  ## Concatenates 2 lines with N.
+get_sunrise_sunset() {  
+    local block  
+    
+
+    # Block extrahieren, der die Wetterdaten enthaelt:  
+    block=$(grep -E -A 999 "\bWetter heute\b" <<< "$1" | grep -E -m2 -B 999 '^\*{4,}')  
+
+    # Zeile mit Sonnenaufgang und Sonnenuntergang extrahieren:  
+    line=$(grep -F 'Sonnenaufgang' <<< "$block")  
+
+    # Zeiten aus der Zeile extrahieren:  
+    read -r sunrise sunset <<< "$(grep -Eo '[0-9]{2}:[0-9]{2}' <<< "$line" | tr '\n' ' ')"  
+
+    # # Pruefen, ob die Zeiten erfolgreich extrahiert wurden:  
+    # if [[ -z "$sunrise" || -z "$sunset" ]]; then  
+    #   echo "FEHLER: Sonnenaufgang oder Sonnenuntergang konnte nicht gefunden werden."  
+    #   return 1  
+    # fi  
+
+}
+
+
+fetch_times_with_degrees () {
+
+# times_and_following_line="$( grep -m1 -EA 999 '={4,}' <<< "$1" |\
+#                              grep -m1 -EB 999 '[*]{5}'         |\
+#                              sed -En '/^[0-9]{2}:[0-9]{2}/{
+#                                N
+#                                {s/\n/,/}
+#                                p
+#                              }'
+#                            )"  # Concatenates 2 lines with N.
+
+  # Bereichsfilter / Auswahl eines zusammenhaengenden Textausschnitts:
+  blockStart='Stundengenau'  # "***** Stundengenau *****"
+  blockEnd='[Aa]lle (Stunden|Details)'  # "Alle Stunden   Alle Details"
+
+  # Zeilenauswahl:
+  # Zeilen mit einer Uhrzeit enden auf 'Uhr'.
+  # Zeilen mit der Angabe einer Temperatur enden mit '\u{b0}', das ist das Gradzeichen.
+  lineFilter="°$"
+
+  times_and_following_line="$(sed -n "/$blockStart/,/$blockEnd/p" <<< "$1" |\
+            awk -v lineFilter="$lineFilter" '
+              # Variablen initialisieren
+              BEGIN {
+                prev_time = ""; prev_temp = "";
+              }
+
+              # Erfasse die Uhrzeit
+              /^[0-9]{1,2} Uhr$/ {
+                prev_time = $0;  # Speichere die Uhrzeit
+                next;           # Gehe zur nächsten Zeile
+              }
+
+              # Erfasse die Temperatur
+              $0 ~ lineFilter {
+                # Gib die vorherige Zeit und die aktuelle Temperatur aus
+                if (prev_time != "") {
+                  printf "%s,%s\n", prev_time, $0;
+                  prev_time = "";  # Zurücksetzen, um Überschneidungen zu vermeiden
+                }
+              }
+              ')"
+
+# echo "$times_and_following_line" | less; exit
 
   i=0
-  for data in $times_and_following_line
-  do
-    if grep -sq '°$' <<< "$data"; then  ## Get pairs of time and degree.
+  for data in $times_and_following_line; do
+    if grep -sq '°$' <<< "$data"; then  # Get pairs of time and degree.
       time="$(cut -d',' -f1 <<< "$data")"
       degree="$(cut -d',' -f2 <<< "$data" | grep -Eo '^[0-9]+')"
       times_with_degrees[$i]="$time-$degree"
       (( i = i + 1 ))
-    elif grep -s '↑$' <<< "$data" > /dev/null; then   ## Get sunrise.
+    elif grep -s '↑$' <<< "$data" > /dev/null; then   # Get sunrise.
       sunrise="$(cut -d',' -f1 <<< "$data")"
-    elif grep -s '↓$' <<< "$data" > /dev/null; then   ## Get sunset.
+    elif grep -s '↓$' <<< "$data" > /dev/null; then   # Get sunset.
       sunset="$(cut -d',' -f1 <<< "$data")"
     fi
   done
+
+  [ -z "$sunrise" ] && get_sunrise_sunset "$1"  # Second try to get sunrise and sunset.
 }
 
 
-function fetch_degrees {
+fetch_degrees () {
+
   if [ -z "$times_and_following_line" ]; then
     fetch_times_with_degrees "$1"
   fi
 
-  last=$(( "${#times_with_degrees[@]}" - 1 ))  ## Index value of last array element.
-  for (( i=0; i<=last; i++ ))
-  do
+  last=$(( "${#times_with_degrees[@]}" - 1 ))  # Index value of last array element.
+  for (( i=0; i<=last; i++ )); do
     temperatures[$i]="$(cut -d'-' -f2 <<< "${times_with_degrees[$i]}")"
   done
 
+# echo "${#temperatures[@]}"; exit
 # echo -ne "Summanden:\n$summanden" | cat -A
 }
 
-matching_input=0
-cancel_info="\n(\"x\", \"exit\" oder \"Ende\" für Abbruch.)"
-while [ -z "$numbers" ];
-do
-  if [ "$matching_input" -ne 1 ]; then
-    prompt="Bitte geben Sie den Namen eines Ortes ein!"
+
+define_output_phrases () {
+  if [ "${LANG:0:2}" = "de" ]; then
+    UILANG="Deutsch"
+    exit_info="(\"x\", \"exit\" oder \"Ende\" für Abbruch.)"
+    standard_prompt="Bitte geben Sie den Namen eines Ortes ein!"
+    alternative_prompt="Bitte geben Sie einen anderen Ortsnamen ein!"
+    no_match="\"$ort\" kann nicht zugeordnet werden."
+    output_title="Das Wetter in"
+    label_current_temperature="Aktuelle Temperatur"
+    label_average_temperature="Durchschnittliche Temperatur"
+  # echo -n "Aktuelle Temperatur: $(cut -d',' -f2 <<< "${temperatures[0]}") °C / "
+  # echo "Durchschnittliche Temperatur: $average_degrees °C"
+    sunrise_praefix="Sonnenaufgang:"
+    sunset_praefix="Sonnenuntergang:"
+    sunrise_sunset_postfix="Uhr"
   else
-    prompt="Bitte geben Sie einen anderen Ortsnamen ein!"
+    UILANG="English"
+    exit_info="\"x\", \"exit\" or \"quit\" for cancellation.)"
+    standard_prompt="Please enter the name of a place or town!"
+    alternative_prompt="Please enter another city name!"
+    no_match="\"$ort\" cannot be matched."
+    output_title="The Weather in"
+    label_current_temperature="Current temperature"
+    label_average_temperature="Average temperature"
+    sunrise_praefix="Sunrise:"
+    sunset_praefix="Sunset:"
+    sunrise_sunset_postfix="o'clock"
+  fi
+}
+
+
+transform_string() {
+#  Converts all letters that are not the first of a word to lowercase,
+# and returns the modified string.
+#
+    input="$*"
+    output=""
+    for word in $input; do
+        first_char="${word:0:1}"
+        rest="${word:1}"
+        rest_lower="${rest,,}"
+        output+="$first_char$rest_lower "
+    done
+    echo "${output% }"
+}
+
+
+# > main < ============================================================
+
+call_self_documentation "$1"  # Display help or version infos.
+
+define_output_phrases
+
+ort="$*"
+# ort="$(sed -E 's:(\()(.+)(\)):\\\1\2\\\3:g' <<< "$*")"  # "Frankfurt (Oder)"
+# echo "$ort"
+
+data_files_readable
+
+# > Determine the location ID (town for weather query): < -------------------
+
+matching_input=0
+cancel_info="\n($exit_info)"
+while [ -z "$numbers" ]; do
+  if [ "$matching_input" -ne 1 ]; then
+    prompt="$standard_prompt"
+  else
+    prompt="$alternative_prompt"
   fi
   if [ -z "$1" ] || [ "$matching_input" -ne 0 ]; then
     echo -e "${prompt}$cancel_info"
@@ -144,55 +365,72 @@ do
     # echo "$ort"
   fi
 
-  if [ "$ort" = "x" ] || [ "$ort" = "exit" ] || grep -i 'ende' <<< "$ort" || [ "$ort" = "q" ] || [ "$ort" = "quit" ]; then
-    exit 0
-  fi
+  # was if [ "$ort" = "x" ] || [ "$ort" = "exit" ] || [ "$ort" = "q" ] || [ "$ort" = "quit" ]; then
+  case "$ort" in
+    x|"exit"|q|quit)  exit 0;;
+  esac
 
-# numbers="$(grep -m1 "^$ort," "$placesFile" | cut -d, -f2)"  ## Versuch zu "Frankfurt (Oder)"
+# numbers="$(grep -m1 "^$ort," "$placesFile" | cut -d, -f2)"  # Versuch zu "Frankfurt (Oder)"
 # numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$placesFile" | cut -d, -f2)"
-  ## First alpabetic character in dataset ID leadign with "#" stands for a special database call.
-  numbers="$(grep -E -m1 "^$ort,([#][a-z])?[[:digit:]]+$" "$placesFile" | cut -d, -f2)"
+  # First alpabetic character in dataset ID leading with "[a-z]" stands for a special database call.
+  numbers="$(grep -E -m1 "^$ort,([a-z])?[[:digit:]]+$" "$placesFile" | cut -d, -f2)"
   if [ -z "$numbers" ]; then
 #   numbers="$(grep -E -m1 "^$ort,[[:digit:]]+$" "$regionsFile" | cut -d, -f2)"
-    numbers="$(grep -E -m1 "^$ort,([#][a-z])?[[:digit:]]+$" "$regionsFile" | cut -d, -f2)"
+    numbers="$(grep -E -m1 "^$ort,([a-z])?[[:digit:]]+$" "$regionsFile" | cut -d, -f2)"
   fi
   if [ -z "$numbers" ]; then
-    echo -ne "\n\"$ort\" kann nicht zugeordnet werden.\n"
+    echo -ne "\n${no_match}\n"
     matching_input=1
   else
     matching_input=0
   fi
 done
 
-if [ "${numbers:0:1}" = "#" ]; then
-  db_ID="${numbers:1:1}"
-  locationID="${numbers:2}"
-else  
+
+if [[ "${numbers:0:1}" =~ [a-z] ]]; then
+  db_ID="${numbers:0:1}"     # Saves second character.
+  locationID="${numbers:1}"  # Saves all chars from third character til string end.
+else
   db_ID="r"
   locationID="$numbers"
 fi
 
+
 weather_data="$(curl -s "https://www.wetter.de/wetter/${db_ID}/$locationID" | html2text -utf8 -width 111)"
 
-echo "====== Das Wetter in $ort ======"
-echo "$weather_data"                   |\
-  grep -m1 -EB 999 '={4,}'             |\
-  grep -F -A200 "Wetter $ort"          |\
-  grep --color=never -E '[A-Z]+.{20,}' |\
-  grep -Ev "^\[One of:|$ort"
+
+# output="$( grep -m1 -EA 1 '[*]{4,} Heute' <<< "$weather_data" | tail -n 1 )"
+output="$( grep -m1 -EA 1 '\*{4,} Heute' <<< "$weather_data" | tail -n 1 )"
+
+# output="$( grep -m1 -EB 999 '={4,}' <<< "$weather_data" |\
+#            grep -F -A200 "Wetter $ort"                  |\
+#            grep --color=never -E '[A-Z]+.{20,}'         |\
+#            grep -Ev "^\[One of:|$ort"
+#          )"
+
+echo "===== $output_title $ort ====="
+if [ "$UILANG" != "Deutsch" ] && command -v trans > /dev/null; then
+  echo "$output" | trans -brief de:en
+else
+  echo "$output"
+fi
 
 fetch_degrees "$weather_data"
-calc_average_centigrades
+calc_average_centigrades; # exit
 
-echo -n "Aktuelle Temperatur: $(cut -d',' -f2 <<< "${temperatures[0]}") °C / "
-echo "Durchschnittliche Temperatur: $average_degrees °C"
+# echo -e "\n\n --> ${temperatures[0]} <--"
+# echo -e "${temperatures[@]}"
+# exit
+
+echo -n "$label_current_temperature: $(cut -d',' -f2 <<< "${temperatures[0]}") °C / "
+echo "$label_average_temperature: $average_degrees °C"
 
 if [ "$sunrise" != "" ]; then
-  sun_info="Sonnenaufgang: $sunrise Uhr"
+  sun_info="$sunrise_praefix $sunrise $sunrise_sunset_postfix"
   [ "$sunset" != "" ] && sun_info="${sun_info} / "
 fi
 if [ "$sunset" != "" ]; then
-  sun_info="${sun_info}Sonnenuntergang: $sunset Uhr"
+  sun_info="${sun_info}$sunset_praefix $sunset $sunrise_sunset_postfix"
 fi
 echo "$sun_info"
 
