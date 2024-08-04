@@ -1,791 +1,900 @@
-Kiel,27021
-Hannover,59418
-Brünst,61822
-Haunstetter Wald,61873
-Weißeneder,61894
-Mentner,61895
-Edlmayr,61896
-Haltern am See,61945
-19,61976
-12,61977
-17,61978
-Lehner,62105
-Oswitzer Wald,62128
-Kleinhesseloher See,62215
-Saale-Orla-Kreis,62339
-Baden-Baden,62340
-Rheinland-Pfalz,62341
-Rheinisch-Bergischer Kreis,62343
-Landkreis Rottweil,62344
-Görlitz,62345
-Landkreis St. Wendel,62346
-Ludwigshafen am Rhein,62347
-Landkreis Neuwied,62348
-Kaufbeuren,62349
-Mittelsachsen,62350
-Speyer,62352
-Potsdam-Mittelmark,62353
-Landkreis Freudenstadt,62354
-Landkreis Aurich,62355
-Landkreis Erding,62356
-Landkreis Altenkirchen (Westerwald),62357
-Kreis Minden-Lübbecke,62358
-Börde,62359
-Südwestpfalz,62360
-Landkreis Trier-Saarburg,62361
-Westerwaldkreis,62362
-Greifswald,62363
-Teltow-Fläming,62364
-Landkreis Hildburghausen,62365
-Thüringen,62366
-Landkreis Kusel,62367
-Lahn-Dill-Kreis,62368
-Potsdam,62369
-Eisenach,62370
-Landkreis Pfaffenhofen an der Ilm,62371
-Saarland,62372
-Oberbergischer Kreis,62373
-Fürth,62374
-Dahme-Spreewald,62376
-Landkreis Aichach-Friedberg,62377
-Landkreis Bayreuth,62378
-Kreis Gütersloh,62379
-Ingolstadt,62381
-Main-Taunus-Kreis,62382
-Landkreis Kronach,62383
-Bautzen,62384
-Mülheim an der Ruhr,62385
-Landkreis Göttingen,62386
-Landkreis Merzig-Wadern,62387
-Landkreis Rastatt,62388
-Landkreis Donau-Ries,62389
-Landkreis Weißenburg-Gunzenhausen,62390
-Landau in der Pfalz,62391
-Reuth b. Erbendorf,62392
-Landkreis Karlsruhe,62393
-Hohenlohekreis,62394
-Herne,62396
-Landkreis Wittmund,62397
-Landkreis Unterallgäu,62398
-Landkreis Osterholz,62399
-Frankfurt am Main,62400
-Landkreis Kassel,62401
-Hochsauerlandkreis,62402
-Erlangen,62403
-Landkreis Miltenberg,62404
-Rostock,62405
-Landkreis Bad Kissingen,62406
-Augsburg,62407
-Kreis Pinneberg,62408
-Oldenburg,62409
-Mönchengladbach,62410
-Regensburg,62411
-Rems-Murr-Kreis,62412
-Havelland,62413
-Delmenhorst,62414
-Landkreis Oberallgäu,62415
-Landkreis Helmstedt,62416
-Kreis Paderborn,62417
-Wolfsburg,62418
-Ilm-Kreis,62419
-Kreis Unna,62420
-Berlin,62422
-Kreis Mettmann,62423
-Unstrut-Hainich-Kreis,62424
-Wittenberg,62425
-Landkreis Diepholz,62426
-Erzgebirgskreis,62427
-München,62428
-Landkreis Harz,62429
-Cottbus,62430
-Landkreis Roth,62431
-Saale-Holzland-Kreis,62432
-Landkreis Leipzig,62434
-Kreis Siegen-Wittgenstein,62437
-Kreis Soest,62440
-Kreis Steinfurt,62442
-Rhein-Lahn-Kreis,62443
-Wilhelmshaven,62444
-Greiz,62445
-Landkreis Saalfeld-Rudolstadt,62447
-Landkreis Erlangen-Höchstadt,62448
-Leverkusen,62449
-Suhl,62450
-Landkreis Kaiserslautern,62451
-Kreis Düren,62452
-Worms,62453
-Landkreis Bad Dürkheim,62454
-Remscheid,62455
-Duisburg,62456
-Landkreis Kitzingen,62457
-Landkreis Starnberg,62458
-Landkreis Weimarer Land,62462
-Würzburg,62464
-Landkreis Würzburg,62465
-Landkreis Saarlouis,62466
-Sachsen,62467
-Landkreis Gotha,62468
-Landkreis Neu-Ulm,62469
-Brandenburg an der Havel,62470
-Pforzheim,62471
-Landkreis Bad Tölz-Wolfratshausen,62472
-Saalekreis,62473
-Landkreis Neunkirchen,62474
-Kreis Kleve,62476
-Jerichower Land,62477
-Wuppertal,62478
-Kreis Herford,62480
-Magdeburg,62481
-Landkreis Stade,62482
-Kreis Lippe,62483
-Landshut,62484
-Sächsische Schweiz-Osterzgebirge,62485
-Oberhavel,62488
-Kreis Viersen,62489
-Landkreis Wunsiedel im Fichtelgebirge,62491
-Altenburger Land,62492
-Weimar,62493
-Landkreis Peine,62494
-Ulm,62495
-Wiesbaden,62496
-Landkreis Aschaffenburg,62497
-Landkreis Landsberg am Lech,62498
-Hamm,62499
-Landkreis Eichsfeld,62500
-Salzlandkreis,62502
-Brandenburg,62504
-Elbe-Elster,62505
-Bonn,62508
-Landkreis Holzminden,62510
-Meißen,62511
-Koblenz,62512
-Landkreis Neustadt an der Aisch-Bad Windsheim,62514
-Landkreis Lichtenfels,62515
-Karlsruhe,62518
-Wetteraukreis,62519
-Landkreis Haßberge,62520
-Landkreis Dillingen an der Donau,62521
-Gelsenkirchen,62522
-Frankfurt (Oder),62523
-Kreis Höxter,62524
-Bamberg,62525
-Dessau-Roßlau,62526
-Rhein-Hunsrück-Kreis,62527
-Neumünster,62528
-Landkreis Schweinfurt,62530
-Braunschweig,62531
-Aschaffenburg,62532
-Landkreis Ostallgäu,62533
-Schweinfurt,62534
-Rhein-Kreis Neuss,62535
-Landkreis Ludwigsburg,62536
-Uckermark,62537
-Düsseldorf,62539
-Landkreis Emsland,62540
-Landkreis Passau,62541
-Main-Tauber-Kreis,62542
-Vogelsbergkreis,62543
-Rhein-Sieg-Kreis,62544
-Stormarn,62546
-Nordsachsen,62547
-Landkreis Cham,62548
-Landkreis Grafschaft Bentheim,62550
-Landkreis Sonneberg,62552
-Barnim,62553
-Weiden in der Oberpfalz,62554
-Kreis Euskirchen,62555
-Landkreis Dachau,62556
-Landkreis Wolfenbüttel,62558
-Bremen,62559
-Landkreis Coburg,62561
-Emden,62562
-Landkreis Waldeck-Frankenberg,62563
-Aachen,62564
-Landkreis Regensburg,62565
-Hochtaunuskreis,62566
-Landkreis Leer,62567
-Landkreis Cochem-Zell,62569
-Oberspreewald-Lausitz,62571
-Landkreis Mayen-Koblenz,62572
-Frankenthal (Pfalz),62573
-Ostprignitz-Ruppin,62574
-Landkreis Tirschenreuth,62575
-Rhein-Neckar-Kreis,62577
-Köln,62578
-Saarpfalz-Kreis,62579
-Landkreis München,62580
-Darmstadt,62581
-Landkreis Schwäbisch Hall,62582
-Eifelkreis Bitburg-Prüm,62584
-Landkreis Limburg-Weilburg,62585
-Werra-Meißner-Kreis,62586
-Landkreis Lörrach,62587
-Landkreis Sömmerda,62588
-Hof,62589
-Memmingen,62590
-Münster,62591
-Landkreis Rottal-Inn,62592
-Chemnitz,62594
-Landkreis Fürstenfeldbruck,62595
-Odenwaldkreis,62596
-Landkreis Cloppenburg,62597
-Kassel,62598
-Wismar,62599
-Landkreis Weilheim-Schongau,62600
-Landkreis Calw,62601
-Altmarkkreis Salzwedel,62602
-Landkreis Konstanz,62603
-Kyffhäuserkreis,62604
-Kreis Borken,62606
-Sachsen-Anhalt,62607
-Landkreis Celle,62608
-Landkreis Ansbach,62609
-Rhein-Pfalz-Kreis,62610
-Baden-Württemberg,62611
-Landkreis Northeim,62613
-Landkreis Kelheim,62614
-Landkreis Vulkaneifel,62615
-Wartburgkreis,62616
-Landkreis Rotenburg (Wümme),62617
-Landkreis Schmalkalden-Meiningen,62618
-Landkreis Neumarkt in der Oberpfalz,62620
-Landkreis Nordhausen,62621
-Landkreis Augsburg,62622
-Landkreis Ahrweiler,62623
-Ortenaukreis,62624
-Uecker-Randow,62625
-Neckar-Odenwald-Kreis,62626
-Landkreis Bamberg,62627
-Oder-Spree,62628
-Passau,62629
-Mainz,62630
-Osnabrück,62631
-Landkreis Mainz-Bingen,62632
-Landkreis Freising,62633
-Bottrop,62634
-Straubing,62636
-Landkreis Hersfeld-Rotenburg,62637
-Halle (Saale),62638
-Burgenlandkreis,62639
-Bayreuth,62640
-Landkreis Main-Spessart,62641
-Pirmasens,62642
-Landkreis Marburg-Biedenkopf,62643
-Bochum,62644
-Bielefeld,62646
-Gifhorn,62647
-Landkreis Oldenburg,62648
-Leipzig,62649
-Hessen,62650
-Regionalverband Saarbrücken,62651
-Kaiserslautern,62652
-Landkreis Südliche Weinstraße,62653
-Ansbach,62654
-Landkreis Neuburg-Schrobenhausen,62655
-Kreis Groß-Gerau,62656
-Landkreis Landshut,62657
-Bremerhaven,62658
-Salzgitter,62659
-Rhein-Erft-Kreis,62661
-Lüchow-Dannenberg,62662
-Landkreis Altötting,62663
-Landkreis Günzburg,62664
-Städteregion Aachen,62665
-Landkreis Vechta,62666
-Landkreis Bernkastel-Wittlich,62668
-Landkreis Goslar,62669
-Gera,62671
-Landkreis Lindau,62672
-Landkreis Osnabrück,62673
-Heidekreis,62674
-Landkreis Osterode am Harz,62677
-Landkreis Birkenfeld,62679
-Landkreis Alzey-Worms,62680
-Mansfeld-Südharz,62681
-Landkreis Tuttlingen,62682
-Spree-Neiße,62683
-Landkreis Eichstätt,62684
-Schwerin,62685
-Landkreis Schwandorf,62686
-Landkreis Forchheim,62687
-Landkreis Ammerland,62689
-Schwarzwald-Baar-Kreis,62690
-Mannheim,62691
-Landkreis Gießen,62692
-Jena,62693
-Main-Kinzig-Kreis,62694
-Offenbach am Main,62695
-Landkreis Germersheim,62698
-Solingen,62699
-Landkreis Fulda,62700
-Kempten (Allgäu),62701
-Greßweiler,62702
-Herzogtum Lauenburg,62703
-Landkreis Darmstadt-Dieburg,62704
-Neubrandenburg,62705
-Kreis Warendorf,62706
-Landkreis Dingolfing-Landau,62707
-Ostalbkreis,62708
-Landkreis Regen,62709
-Landkreis Deggendorf,62711
-Landkreis Berchtesgadener Land,62712
-Essen,62713
-Landkreis Offenbach,62715
-Landkreis Waldshut,62716
-Coburg,62717
-Bremen,62718
-Zweibrücken,62719
-Schwabach,62720
-Landkreis Böblingen,62721
-Enzkreis,62723
-Neustadt an der Weinstraße,62724
-Stendal,62725
-Landkreis Garmisch-Partenkirchen,62726
-Landkreis Straubing-Bogen,62727
-Landkreis Nienburg/Weser,62728
-Kreis Bergstraße,62730
-Landkreis Wesermarsch,62731
-Kreis Segeberg,62733
-Oberhausen,62734
-Schwalm-Eder-Kreis,62736
-Donnersbergkreis,62737
-Prignitz,62738
-Landkreis Rhön-Grabfeld,62739
-Landkreis Verden,62740
-Landkreis Bad Kreuznach,62741
-Landkreis Hildesheim,62742
-Uelzen,62743
-Landkreis Nürnberger Land,62744
-Erfurt,62745
-Rheingau-Taunus-Kreis,62746
-Anhalt-Bitterfeld,62747
-Krefeld,62748
-Dinsheim,62749
-Landkreis Heilbronn,62750
-Heilbronn,62751
-Agentur für Arbeit,62752
-Heiligenberg,62753
-Nordrhein-Westfalen,62761
-Landkreis Schaumburg,62762
-Region Hannover,62764
-Landkreis Amberg-Sulzbach,62765
-Landkreis Hameln-Pyrmont,62766
-Kreis Heinsberg,62767
-Freiburg im Breisgau,62768
-Kreis Recklinghausen,62770
-Niedersachsen,62771
-Amberg,62772
-Landkreis Friesland,62773
-Landkreis Fürth,62778
-Kreis Coesfeld,62779
-Nürnberg,62780
-Hamburg,62782
-Zwickau,62785
-10,62814
-Flembach,62828
-Northern Lagoon,62834
-Schafsteich,62850
-Lengeder Teiche,62854
-Eltersdorfer Bach,62855
-Finanzamt Gifhorn,62864
-Pichler,62913
-Michl in Guttenbrunn,62933
-Karl in Guttenbrunn,62934
-Vogtlandkreis,62943
-Breittobel,62998
-Johannisholz,63008
-Lac de Canotage,63011
-Ramel,63025
-Kriehmayr,63026
-Singen,63056
-Königsbach,63057
-Königsbach-Stein,63058
-Stein,63059
-Nußbaum,63062
-Mintrachinger Holz,63066
-Angerteich,63088
-Stadlbauer,63126
-Pachinger,63127
-Leitner,63128
-26,63129
-Fellner,63131
-14,63132
-Grubauer,63133
-Höllwirth,63134
-73,63135
-Hansbauer,63136
-15,63137
-Ebner,63138
-Grasbauer,63139
-Bezirk Kirchdorf,63163
-Kremsmünster,63164
-Sipbachzell,63166
-Sattledt,63167
-Eberstalzell,63168
-Ried im Traunkreis,63169
-Steinerkirchen an der Traun,63173
-Fischlham,63174
-Wels,63175
-Gunskirchen,63176
-Schottenstift,63185
-Tritonwasser,63192
-Wagensass,63210
-Nöttingen,63247
-Weißkirchen an der Traun,63251
-Ilkerbruch,63254
-Steinhaus,63266
-Regierungsbezirk Düsseldorf,63306
-Feuchter Forst,63345
-Bezirk Gmunden,63349
-Marchtrenk,63359
-Grötzingen,63379
-Wolfartsweier,63380
-Oberreut,63381
-Grünwettersbach,63382
-Rüppurr,63383
-Palmbach,63384
-Hohenwettersbach,63385
-Waldstadt,63386
-Weststadt,63387
-Weiherfeld-Dammerstock,63388
-Innenstadt-West,63389
-Nordstadt,63390
-Daxlanden,63391
-Nordweststadt,63392
-Südstadt,63393
-Stupferich,63394
-Mühlburg,63395
-Rintheim,63396
-Grünwinkel,63397
-Knielingen,63398
-Durlach,63399
-Südweststadt,63400
-Oststadt,63401
-Beiertheim-Bulach,63402
-Innenstadt-Ost,63403
-Neureut,63404
-Hagsfeld,63405
-Alte Deponie,63449
-Marl,63460
-Oer-Erkenschwick,63502
-Herten,63503
-Gladbeck,63504
-Dorsten,63505
-Datteln,63509
-Waltrop,63510
-Teverener Heide,63580
-Regierungsbezirk Münster,63594
-Pettenbach,63606
-Bezirk St. Pölten,63619
-Traismauer,63620
-Nußdorf ob der Traisen,63625
-Spellersand,63692
-Landratsamt Freising Neubau,63733
-Flachweiher,63764
-Itzehoer Klosterforst,63790
-500,63846
-2,63849
-7,63850
-30,63851
-Dresden,191645
-Dortmund,1829065
-Lüneburg,2420744
-Stuttgart,2793104
-Paderborn,5610766
-Speyerbach,940121
-Heinrich-Heine-Gymnasium,940209
-Rozendaalsche Veld,940541
-Maitenbeth,940681
-Rechtmehring,940682
-Trerichsweiher,940684
-Haag in Oberbayern,940688
-Reichertsheim,940708
-Kirchdorf,940709
-Pütter See,940780
-Unterreit,940784
-Gars am Inn,940786
-Schwindegg,940828
-Obertaufkirchen,940831
-Wolfgang-Borchert-Siedlung,940832
-Rattenkirchen,940837
-Heldenstein,940859
-Buchbach,940862
-Oberbergkirchen,940863
-Schönberg,940871
-Mehrstetten,940880
-Egglkofen,940903
-Taufkirchen,940961
-Niedertaufkirchen,940966
-Niederbergkirchen,940967
-Lohkirchen,940969
-Zangberg,940971
+ - https://www.wetter.de/wetter/r/~Minden,139087
 Mettenheim,941000
-Ampfing,941001
-Erharting,941002
-Mühldorf a. Inn,941004
-Oberneukirchen,941041
-Polling,941042
-Mühldorfer Hart,941054
-Aschau am Inn,941055
-Jettenbach,941065
-Kraiburg,941066
-Waldkraiburg,941067
-Altenstadt,941073
-Nersingen,941074
-Vöhringen,941075
-Pfaffenhofen an der Roth,941076
-Roggenburg,941077
-Elchingen,941078
-Kellmünz a.d.Iller,941079
-Oberroth,941080
-Weißenhorn,941081
-Stoffenrieder Forst,941082
-Auwald,941083
-Bellenberg,941084
-Unterroth,941085
-Buch,941086
-Neu-Ulm,941087
-Osterberg,941088
-Illertissen,941089
-Holzheim,941090
-Senden,941091
-Unterroggenburger Wald,941092
-Oberroggenburger Wald,941093
-Vöckelsbach,941095
-Hecken,41531
-Tacherting,41603
-Engelsberg,941604
-Schnaitsee,941616
-Pittenhart,941617
-Obing,941624
-Seeon-Seebruck,941626
-Kienberg,941637
-Altenmarkt an der Alz,941639
-Trostberg,941651
-Palling,941652
-Tittmoning,941656
-Fridolfing,941659
-Petting,941671
-Kirchanschöring,941672
-Taching am See,941675
-Waginger See,941677
-Waging am See,941680
-Wonneberg,941681
-Inzell,941683
-Reit im Winkl,941684
-Ruhpolding,941688
-Unterwössen,941705
-Schleching,941706
-Grassau,41728
-Marquartstein,941729
-Staudach-Egerndach,941731
-Übersee,941735
-Chieming,941738
-Grabenstätt,941739
-Traunreut,941741
-Nußdorf,941743
-Surberg,941744
-Traunstein,941745
-Siegsdorf,941746
-Vachendorf,941748
-Bergen,941749
-Walluf,941754
-Saaldorf-Surheim,941756
-Freilassing,941757
-Teisendorf,941760
-Ainring,941761
-Piding,941790
-Anger,941791
-Bad Reichenhall,941794
-Bayerisch Gmain,941795
-Schneizlreuth,941796
-Ramsau bei Berchtesgaden,941797
+Frankfurt am Main,62400
+Südweststadt,63400
+Landkreis Eichsfeld,62500
+Landkreis Weilheim-Schongau,62600
+Landkreis Fulda,62700
 Schönau am Königssee,941800
-Bischofswiesen,941829
-Marktschellenberg,941833
-Schellenberger Forst,941834
-Berchtesgaden,941837
 Mariendorf,162900
 Berlin-Mariendorf,162900
-Bütthard,162332
-Kirchheim,162339
-Bad Arolsen,162356
-Kleingartenverein Roßthaler Höhe,162359
-Giebelstadt,162360
-Aindling,162450
-Hollenbach,162451
-Petersdorf,162452
-Aindling,162453
-Todtenweis,162454
-Rehling,162455
-Rangsdorf,162462
-Inden,162463
-Heimbach,162469
-Schenkenländchen,162471
-Hürth,162473
-Gundelsheim,162490
-Universitätsbibliothek,162528
-Schulgarten,162530
-Langerwehe,162550
-Große Sandteiche,162551
-Deutschbaselitzer Großteich,162560
-Höhenwerkstatt GmbH, Trainingszentrum Wels,162568
-Buckow,162573
-Breuna,162612
-Sonderhofen,162637
-Riedenheim,162642
-Tauberrettersheim,162672
-Röttingen,162673
-Bieberehren,162692
-Aub,162693
-Gelchsheim,162711
-Gaukönigshofen,162712
-Isselburg,162713
-Bocholt,162715
-Rhede,162717
-Raesfeld,162718
-Borken,162723
-Reken,162724
-Heiden,162727
-Velen,162729
-Südlohn,162731
-Gescher,162733
-Wenigenjena,162811
-Kernberge,162812
-Wenigenjena, Schlegelsberg,162813
-Witten,162826
-Hattingen,162828
-Sprockhövel,162829
-Wetter (Ruhr),162832
-Schwelm,162833
-Vreden,162864
-Gronau,162865
-Elfrather See,162870
-Großer Wald,162871
-Heek,162873
-Schöppingen,162874
-Legden,162875
-Stadtlohn,162876
-Ahaus,162877
-Tempelhof,162894
-Mariendorf,162900
-Britz,162901
-Neukölln,162902
-Rathaus Charlottenburg,162962
-Bad Gandersheim,163003
-Kalefeld,163004
-Groß Glienicker See,163016
-Düren,163046
-Ochsenfurt,163052
-Frickenhausen a.Main,163053
-Eibelstadt,163057
-Winterhausen,163058
-Lauf an der Pegnitz,163109
-Futbalov tadión Kemarok,163115
-Drolshagen,163174
-Kirchhundem,163175
-Finnentrop,163177
-Attendorn,163178
-Olpe,163179
-Schönberg,163196
-Niederzier,163305
-Blatzheim,163306
-Neuss,163307
+Wagensass,63210
 Merzenich,163310
-Nörvenich,163311
-Nideggen,163312
-Vettweiß,163313
-Kreuzau,163314
-Hürtgenwald,163315
-Gruber,163323
-Steinwendner Hof,163325
-Franziskanerkloster,163366
-Eibsee,163453
-Übleis Mostheuriger,163493
-Rehauer Forst,55044
-Troisdorf,55060
-Bad Godesberg,55070
-Hardtberg,55071
-Arenberg-Immendorf,55092
-Arenberg,55093
-Immendorf,55094
-Arzheim,55102
-Kesselheim,55103
-Bubenheim,55104
-Moselweiß,55115
-Lay,55116
-Stolzenfels,55117
-Wallersheim,55118
-Neuendorf,55119
+Mönchengladbach,62410
+Landkreis Holzminden,62510
+Waltrop,63510
+Rhein-Pfalz-Kreis,62610
 Lützel,55120
-Metternich,55129
+Kreis Unna,62420
+Landkreis Haßberge,62520
+Landkreis Neumarkt in der Oberpfalz,62620
+Traismauer,63620
+Schwabach,62720
+Karlmair,56820
+Badweiher,56030
 Rauental,55130
-Altstadt,55131
-Goldgrube,55132
-Oberwerth,55134
-Süd,55135
-Niederberg,55136
-Ehrenbreitstein,55137
+Cottbus,62430
+Germanisches Nationalmuseum,56430
+Schulgarten,162530
+Landkreis Schweinfurt,62530
+Mainz,62630
+Kreis Bergstraße,62730
+Gusner,56830
+Vorderhinterberger,55930
 Horchheimer Höhe,55140
-Horchheim,55141
-Karthäuserhofgelände,55143
-Karthause Flugfeld,55144
-Karthause Nord,55145
-Büdingen,55158
-Gschwend,55190
-Neulingen,55218
-Wilferdingen,55222
-Röhlinswald,55250
-Blumenviertel,55278
-Leibniz-Institut für ökologische Raumentwicklung,55475
-Alt-Radebeul,55498
-Serkowitz,55499
-Niederlößnitz,55501
-Kötzschenbroda Oberort,55503
-Steinbruckmühl,55528
-Wahlmüller,55529
-Högerl,55532
-Vogelhofer,55533
-Sepp,55534
-Toffelsteich,55579
-Krummer See,55635
-Tonbruch,55641
-Steglitz-Zehlendorf,55734
-Steglitz,55735
-Lichterfelde,55737
-Dahlem,55738
+Baden-Baden,62340
+Kreis Soest,62440
+Landkreis Emsland,62540
+Bayreuth,62640
+Landkreis Verden,62740
 Wilmersdorf,55740
-Halensee,55741
-Grunewald,55742
-Wittenau,55743
-Märkisches Viertel,55744
-Schöneberg,55751
-Marienfelde,55753
-Treptow-Köpenick,55754
-Adlershof,55756
-Rudow,55757
-Johannisthal,55758
-Niederschöneweide,55759
+Röhlinswald,55250
+Mittelsachsen,62350
+Putzbrunn,56350
+Aindling,162450
+Suhl,62450
+Langerwehe,162550
+Landkreis Grafschaft Bentheim,62550
+Hessen,62650
+Landkreis Heilbronn,62750
+Schafsteich,62850
+7,63850
+Carolasee,56950
+Troisdorf,55060
+Giebelstadt,162360
+Südwestpfalz,62360
+Marl,63460
+Deutschbaselitzer Großteich,162560
+Karldorfer,56660
+Teisendorf,941760
 Baumschulenweg,55760
-Alt-Treptow,55762
-Friedrichshain,55763
-Friedrichshain-Kreuzberg,55764
-Kreuzberg,55765
-Großbeeren,55769
+Bad Godesberg,55070
+Eisenach,62370
+Brandenburg an der Havel,62470
+Beckhausen-Sutum,56570
+Kreis Recklinghausen,62770
 Blankenfelde-Mahlow,55770
-Mittenwalde,55771
-Schönefeld,55772
-Eichwalde,55773
-Schulzendorf,55774
-Zeuthen,55775
-Königs Wusterhausen,55777
-Gosen-Neu Zittau,55778
-Spreenhagen,55779
+Elfrather See,162870
+Oberroth,941080
+Wolfartsweier,63380
+Kreis Herford,62480
+Landkreis München,62580
+Teverener Heide,63580
+Waging am See,941680
+Landkreis Alzey-Worms,62680
+Heiligenhaus,56680
+Pütter See,940780
+Nürnberg,62780
 Erkner,55780
+Mehrstetten,940880
+Pépinière,56880
+Holzheim,941090
+Gschwend,55190
+Landkreis Weißenburg-Gunzenhausen,62390
+Nordstadt,63390
+Schwabing-Freimann,56390
+Gundelsheim,162490
+Memmingen,62590
+Schwarzwald-Baar-Kreis,62690
+Piding,941790
+Itzehoer Klosterforst,63790
+Halmer,56790
+Ampfing,941001
+Landkreis Kassel,62401
+Oststadt,63401
+Niederlößnitz,55501
+Landkreis Calw,62601
+Kempten (Allgäu),62701
+Britz,162901
+Lac de Canotage,63011
+Nörvenich,163311
+Regensburg,62411
+Meißen,62511
+Baden-Württemberg,62611
+Gelchsheim,162711
+Landkreis Deggendorf,62711
+Wenigenjena,162811
+Kiel,27021
+Speyerbach,940121
+Halterner Stausee,56121
+Landkreis Dillingen an der Donau,62521
+Landkreis Nordhausen,62621
+Landkreis Böblingen,62721
+Fellner,63131
+Altstadt,55131
+Landkreis Roth,62431
+Kravaalbos,56431
+Hecken,41531
+Braunschweig,62531
+Osnabrück,62631
+Staudach-Egerndach,941731
+Südlohn,162731
+Landkreis Wesermarsch,62731
+Obertaufkirchen,940831
+Hinterer Hinterberger,55931
+Oberneukirchen,941041
+Horchheim,55141
+Rheinland-Pfalz,62341
+Rozendaalsche Veld,940541
+Landkreis Passau,62541
+Landkreis Main-Spessart,62641
+Tonbruch,55641
+Traunreut,941741
+Landkreis Bad Kreuznach,62741
+Halensee,55741
+Weißkirchen an der Traun,63251
+Hollenbach,162451
+Landkreis Kaiserslautern,62451
+Große Sandteiche,162551
+Trostberg,941651
+Regionalverband Saarbrücken,62651
+Heilbronn,62751
+Schöneberg,55751
+30,63851
+Landkreis Trier-Saarburg,62361
+Landkreis Coburg,62561
+Rhein-Erft-Kreis,62661
+Knoll,56661
+Ainring,941761
+Nordrhein-Westfalen,62761
+Taufkirchen,940961
+Hardtberg,55071
+Landkreis Pfaffenhofen an der Ilm,62371
+Schenkenländchen,162471
+Pforzheim,62471
+Oberspreewald-Lausitz,62571
+Petting,941671
+Gera,62671
+Niedersachsen,62771
+Mittenwalde,55771
+Schönberg,940871
+Großer Wald,162871
+Zangberg,940971
+Weißenhorn,941081
+Ingolstadt,62381
+Oberreut,63381
+Magdeburg,62481
+Darmstadt,62581
+Maitenbeth,940681
+Wonneberg,941681
+Mansfeld-Südharz,62681
 Petershagen/Eggersdorf,55781
+Senden,941091
+Landau in der Pfalz,62391
+Daxlanden,63391
+Altstadt-Lehel,56391
+Landkreis Wunsiedel im Fichtelgebirge,62491
+Münster,62591
+Mannheim,62691
+Anger,941791
+Schöll,55891
+Erharting,941002
+Arzheim,55102
+Hochsauerlandkreis,62402
+Beiertheim-Bulach,63402
+Salzlandkreis,62502
+Oer-Erkenschwick,63502
+Altmarkkreis Salzwedel,62602
+Greßweiler,62702
+Neukölln,162902
+Nideggen,163312
+Rems-Murr-Kreis,62412
+Koblenz,62512
+Breuna,162612
+Gaukönigshofen,162712
+Landkreis Berchtesgadener Land,62712
+Kernberge,162812
+Wilferdingen,55222
+Berlin,62422
+Gelsenkirchen,62522
+Landkreis Augsburg,62622
+Brünst,61822
+14,63132
+Goldgrube,55132
+Bütthard,162332
+Saale-Holzland-Kreis,62432
+Aschaffenburg,62532
+Högerl,55532
+Landkreis Mainz-Bingen,62632
+Wolfgang-Borchert-Siedlung,940832
+Wetter (Ruhr),162832
+Steckerberger,55932
+Polling,941042
+Lagoa Pau Grosso,57142
+Kreis Steinfurt,62442
+Main-Tauber-Kreis,62542
+Riedenheim,162642
+Pirmasens,62642
+Landkreis Hildesheim,62742
+Grunewald,55742
+Ochsenfurt,163052
+Speyer,62352
+Petersdorf,162452
+Kreis Düren,62452
+Landkreis Sonneberg,62552
+Palling,941652
+Kaiserslautern,62652
+Agentur für Arbeit,62752
+Nußbaum,63062
+Westerwaldkreis,62362
+Rangsdorf,162462
+Landkreis Weimarer Land,62462
+Emden,62562
+Lüchow-Dannenberg,62662
+Landkreis Schaumburg,62762
+Alt-Treptow,55762
+Buchbach,940862
+Rathaus Charlottenburg,162962
+Saarland,62372
+Landkreis Bad Tölz-Wolfratshausen,62472
+Landkreis Mayen-Koblenz,62572
+Kirchanschöring,941672
+Tauberrettersheim,162672
+Landkreis Lindau,62672
+Amberg,62772
+Schönefeld,55772
+Stoffenrieder Forst,941082
+Main-Taunus-Kreis,62382
+Grünwettersbach,63382
+Landkreis Stade,62482
+Landkreis Schwäbisch Hall,62582
+Rechtmehring,940682
+Landkreis Tuttlingen,62682
+Ratingen,56682
+Hamburg,62782
 Eggersdorf,55782
-Petershagen,55783
+Unterroggenburger Wald,941092
+Arenberg-Immendorf,55092
+Tritonwasser,63192
+Reuth b. Erbendorf,62392
+Nordweststadt,63392
+Altenburger Land,62492
+Landkreis Rottal-Inn,62592
+Bieberehren,162692
+Landkreis Gießen,62692
+Spellersand,63692
+Bad Gandersheim,163003
+Kesselheim,55103
+Erlangen,62403
+Innenstadt-Ost,63403
+Herten,63503
+Kötzschenbroda Oberort,55503
+Tacherting,41603
+Landkreis Konstanz,62603
+Herzogtum Lauenburg,62703
 Tatenhauser Wald,55803
+Egglkofen,940903
+Vettweiß,163313
+Havelland,62413
+Landkreis Northeim,62613
+Isselburg,162713
+Essen,62713
+Schlegelsberg,162813
+Pichler,62913
+Kalven,56223
+Gruber,163323
+Kreis Mettmann,62423
+Frankfurt (Oder),62523
+Landkreis Ahrweiler,62623
+Borken,162723
+Enzkreis,62723
+Karlsplatz,56823
+Grubauer,63133
+Landkreis Ostallgäu,62533
+Vogelhofer,55533
+Landkreis Freising,62633
+Gescher,162733
+Kreis Segeberg,62733
+Landratsamt Freising Neubau,63733
+Marktschellenberg,941833
+Schwelm,162833
+Michl in Guttenbrunn,62933
+Moser,55933
+Karthäuserhofgelände,55143
+Universität Zürich Theologische Fakultät,57243
+Rheinisch-Bergischer Kreis,62343
+Rhein-Lahn-Kreis,62443
+Vogelsbergkreis,62543
+Landkreis Marburg-Biedenkopf,62643
+Nußdorf,941743
+Uelzen,62743
+Wittenau,55743
+Vogtlandkreis,62943
+Frickenhausen a.Main,163053
+Potsdam-Mittelmark,62353
+Aindling,162453
+Worms,62453
+Eibsee,163453
+Barnim,62553
+Landkreis Südliche Weinstraße,62653
+Heiligenberg,62753
+Marienfelde,55753
+Bezirk Kirchdorf,63163
+Greifswald,62363
+Inden,162463
+Landkreis Waldeck-Frankenberg,62563
+Landkreis Altötting,62663
+Friedrichshain,55763
+Oberbergkirchen,940863
+Altenstadt,941073
+Steinerkirchen an der Traun,63173
+Oberbergischer Kreis,62373
+Hürth,162473
+Saalekreis,62473
+Buckow,162573
+Frankenthal (Pfalz),62573
+Röttingen,162673
+Landkreis Osnabrück,62673
+Landkreis Friesland,62773
+Eichwalde,55773
+Haunstetter Wald,61873
+Heek,162873
+Auwald,941083
+Landkreis Kronach,62383
+Rüppurr,63383
+Kreis Lippe,62483
+Inzell,941683
+Spree-Neiße,62683
+Petershagen,55783
+Oberroggenburger Wald,941093
+Arenberg,55093
+Landkreis Karlsruhe,62393
+Südstadt,63393
+Au-Haidhausen,56393
+Weimar,62493
+Übleis Mostheuriger,163493
+Rathaus Köpenick,57493
+Aub,162693
+Jena,62693
+Mühldorf a. Inn,941004
+Kalefeld,163004
+Stuttgart,2793104
+Bubenheim,55104
+Landkreis Miltenberg,62404
+Neureut,63404
+Brandenburg,62504
+Gladbeck,63504
+Engelsberg,941604
+Kyffhäuserkreis,62604
+Landkreis Darmstadt-Dieburg,62704
 Vennteichsee,55804
+Kreuzau,163314
+Delmenhorst,62414
+McClintock Hall,56414
+Landkreis Neustadt an der Aisch-Bad Windsheim,62514
+Landkreis Kelheim,62614
+10,62814
+Unstrut-Hainich-Kreis,62424
+Kreis Höxter,62524
+Obing,941624
+Ortenaukreis,62624
+Reken,162724
+Neustadt an der Weinstraße,62724
+Konradshöhe,56724
+Katzl,55924
+Höllwirth,63134
+Oberwerth,55134
+Landkreis Leipzig,62434
+Wannenwald,56434
+Schweinfurt,62534
+Sepp,55534
+Bottrop,62634
+Oberhausen,62734
+Steglitz-Zehlendorf,55734
+Schellenberger Forst,941834
+Northern Lagoon,62834
+Karl in Guttenbrunn,62934
+Schwaighauser Forst,55934
+Rehauer Forst,55044
+Karthause Flugfeld,55144
+Landkreis Rottweil,62344
+Wilhelmshaven,62444
+Postbank,56444
+Rhein-Sieg-Kreis,62544
+Bochum,62644
+Lüneburg,2420744
+Surberg,941744
+Landkreis Nürnberger Land,62744
+Märkisches Viertel,55744
+Mühldorfer Hart,941054
+Ilkerbruch,63254
+Landkreis Freudenstadt,62354
+Todtenweis,162454
+Landkreis Bad Dürkheim,62454
+Weiden in der Oberpfalz,62554
+Erle-Berger Feld,56554
+Ansbach,62654
+Walluf,941754
+Treptow-Köpenick,55754
+Lengeder Teiche,62854
+Kremsmünster,63164
+Teltow-Fläming,62364
+Österreichische Finanzmarktaufsicht,56364
+Würzburg,62464
+Aachen,62564
+Landkreis Günzburg,62664
+Castrop-Rauxel,56664
+Region Hannover,62764
+Flachweiher,63764
+Friedrichshain-Kreuzberg,55764
+Vreden,162864
+Finanzamt Gifhorn,62864
+Bayerisches Landeskriminalamt,56964
+Nersingen,941074
+Drolshagen,163174
+Fischlham,63174
+Tegel,56274
+Fürth,62374
+Landkreis Neunkirchen,62474
+Ostprignitz-Ruppin,62574
+Heidekreis,62674
+Schulzendorf,55774
+Schöppingen,162874
+Bellenberg,941084
+Bautzen,62384
+Palmbach,63384
+Landshut,62484
+Eifelkreis Bitburg-Prüm,62584
+Trerichsweiher,940684
+Reit im Winkl,941684
+Landkreis Eichstätt,62684
+Unterreit,940784
+Immendorf,55094
+Hohenlohekreis,62394
+Stupferich,63394
+Landkreis Peine,62494
+Chemnitz,62594
+Regierungsbezirk Münster,63594
+Main-Kinzig-Kreis,62694
+Bad Reichenhall,941794
+Weißeneder,61894
+Tempelhof,162894
+Lehner,62105
+Niederzier,163305
+Rostock,62405
+Hagsfeld,63405
+Elbe-Elster,62505
+Dorsten,63505
+Unterwössen,941705
+Neubrandenburg,62705
+Futbalov tadión Kemarok,163115
+Moselweiß,55115
+Kleinhesseloher See,62215
+Hürtgenwald,163315
+Landkreis Oberallgäu,62415
+Social Sciences,56415
+Landkreis Lichtenfels,62515
+Landkreis Vulkaneifel,62615
+Bocholt,162715
+Landkreis Offenbach,62715
+Ramel,63025
+Steinwendner Hof,163325
+Wittenberg,62425
+Hochwald,56425
+Bamberg,62525
+Uecker-Randow,62625
+Nußdorf ob der Traisen,63625
+Stendal,62725
+73,63135
+Süd,55135
+Rhein-Kreis Neuss,62535
+Krummer See,55635
+Übersee,941735
+Steglitz,55735
+Karthause Nord,55145
+Görlitz,62345
+Feuchter Forst,63345
+Greiz,62445
+Dresden,191645
+Traunstein,941745
+Erfurt,62745
+Haltern am See,61945
+Aschau am Inn,941055
+Landkreis Aurich,62355
+Rehling,162455
+Remscheid,62455
+Kreis Euskirchen,62555
+Landkreis Neuburg-Schrobenhausen,62655
+Löwendorfer Berge,56755
+Eltersdorfer Bach,62855
+Jettenbach,941065
+Dortmund,1829065
+Landkreis Hildburghausen,62365
+Landkreis Würzburg,62465
+Landkreis Regensburg,62565
+Städteregion Aachen,62665
+Recklinghausen,56665
+Landkreis Amberg-Sulzbach,62765
+Kreuzberg,55765
+Gronau,162865
+Alte Hopfenpost,56965
+Vöhringen,941075
+Kirchhundem,163175
+Wels,63175
+Leibniz-Institut für ökologische Raumentwicklung,55475
+Landkreis Tirschenreuth,62575
+Taching am See,941675
+Zeuthen,55775
+Legden,162875
+Unterroth,941085
+Schottenstift,63185
+Mülheim an der Ruhr,62385
+Hohenwettersbach,63385
+Sächsische Schweiz-Osterzgebirge,62485
+Landkreis Limburg-Weilburg,62585
+Schwerin,62685
+Zwickau,62785
+Messehaus,56885
+Vöckelsbach,941095
+Mühlburg,63395
+Untergiesing-Harlaching,56395
+Ulm,62495
+Hauptgebäude,57495
+Landkreis Fürstenfeldbruck,62595
+Offenbach am Main,62695
+Bayerisch Gmain,941795
+Mentner,61895
+Blatzheim,163306
+Regierungsbezirk Düsseldorf,63306
+Landkreis Bad Kissingen,62406
+Kreis Borken,62606
+Pettenbach,63606
+Schleching,941706
+Kreis Warendorf,62706
+Groß Glienicker See,163016
+Lay,55116
+Landkreis Helmstedt,62416
+Schnaitsee,941616
+Wartburgkreis,62616
+Landkreis Waldshut,62716
+Königssee,56916
+Kriehmayr,63026
+Stadlbauer,63126
+Landkreis Diepholz,62426
+Fockenbach,56426
+Dessau-Roßlau,62526
+Seeon-Seebruck,941626
+Neckar-Odenwald-Kreis,62626
+Landkreis Garmisch-Partenkirchen,62726
+Witten,162826
+Hansbauer,63136
+Niederberg,55136
+Landkreis Ludwigsburg,62536
+Straubing,62636
+Schwalm-Eder-Kreis,62736
+Düren,163046
+Landkreis St. Wendel,62346
+Stormarn,62546
+Bielefeld,62646
+Siegsdorf,941746
+Rheingau-Taunus-Kreis,62746
+500,63846
 Tannenwäldchen,55846
-Zehlendorf,#n3961281931
+Singen,63056
+Bad Arolsen,162356
+Landkreis Erding,62356
+Duisburg,62456
+Landkreis Dachau,62556
+Tittmoning,941656
+Kreis Groß-Gerau,62656
+Saaldorf-Surheim,941756
+Adlershof,55756
+Im Heiligen,56956
+Kraiburg,941066
+Mintrachinger Holz,63066
+Sipbachzell,63166
+Steinhaus,63266
+Thüringen,62366
+Franziskanerkloster,163366
+Landkreis Saarlouis,62466
+Hochtaunuskreis,62566
+Klein Köriser See,57566
+Landkreis Vechta,62666
+Paderborn,5610766
+Landkreis Hameln-Pyrmont,62766
+Niedertaufkirchen,940966
+ATMOS,56966
+Pfaffenhofen an der Roth,941076
+Gunskirchen,63176
+Dahme-Spreewald,62376
+Kreis Kleve,62476
+Stadtlohn,162876
+19,61976
+Buch,941086
+Landkreis Göttingen,62386
+Waldstadt,63386
+Werra-Meißner-Kreis,62586
+Landkreis Schwandorf,62686
+Gars am Inn,940786
+Schönberg,163196
+Herne,62396
+Rintheim,63396
+Wiesbaden,62496
+Odenwaldkreis,62596
+Schneizlreuth,941796
+Edlmayr,61896
+Neuss,163307
+Augsburg,62407
+Sachsen-Anhalt,62607
+Landkreis Dingolfing-Landau,62707
+Stolzenfels,55117
+Kreis Paderborn,62417
+Pittenhart,941617
+Landkreis Rotenburg (Wümme),62617
+Rhede,162717
+Coburg,62717
+Kleinaistegger,56817
+Pachinger,63127
+Amtsgericht Potsdam,56127
+Erzgebirgskreis,62427
+Rhein-Hunsrück-Kreis,62527
+Landkreis Bamberg,62627
+Heiden,162727
+Landkreis Straubing-Bogen,62727
+Grund- und Hauptschule Sinzing,55927
+15,63137
+Ehrenbreitstein,55137
+Kreis Siegen-Wittgenstein,62437
+Uckermark,62537
+Kienberg,941637
+Sonderhofen,162637
+Landkreis Hersfeld-Rotenburg,62637
+Donnersbergkreis,62737
+Lichterfelde,55737
+Rattenkirchen,940837
+Berchtesgaden,941837
+Nöttingen,63247
+Ludwigshafen am Rhein,62347
+Landkreis Saalfeld-Rudolstadt,62447
+Nordsachsen,62547
+Gifhorn,62647
+Anhalt-Bitterfeld,62747
+Eibelstadt,163057
+Königsbach,63057
+Landkreis Altenkirchen (Westerwald),62357
+Landkreis Kitzingen,62457
+Landkreis Landshut,62657
+Freilassing,941757
+Rudow,55757
+Art Deco Palais,56857
+Waldkraiburg,941067
+Sattledt,63167
+Landkreis Kusel,62367
+Holburn Lake,56367
+Sachsen,62467
+Landkreis Leer,62567
+Kreis Heinsberg,62767
+Niederbergkirchen,940967
+Roggenburg,941077
+Finnentrop,163177
+Landkreis Aichach-Friedberg,62377
+Jerichower Land,62477
+Rhein-Neckar-Kreis,62577
+Waginger See,941677
+Landkreis Osterode am Harz,62677
+Königs Wusterhausen,55777
+Ahaus,162877
+12,61977
+Neu-Ulm,941087
+Landkreis Merzig-Wadern,62387
+Weststadt,63387
+Milbertshofen-Am Hart,56387
+Landkreis Lörrach,62587
+Landkreis Forchheim,62687
+Landkreis Wittmund,62397
+Grünwinkel,63397
+Ramersdorf-Perlach,56397
+Landkreis Aschaffenburg,62497
+Landkreis Cloppenburg,62597
+Ramsau bei Berchtesgaden,941797
+Johannisholz,63008
+Kreis Pinneberg,62408
+Bonn,62508
+Landkreis Celle,62608
+Reichertsheim,940708
+Ostalbkreis,62708
+Wallersheim,55118
+Neulingen,55218
+Wolfsburg,62418
+Hannover,59418
+Karlsruhe,62518
+Landkreis Schmalkalden-Meiningen,62618
+Bremen,62718
+Raesfeld,162718
+Oswitzer Wald,62128
+Leitner,63128
+München,62428
+Universitätsbibliothek,162528
+Neumünster,62528
+Steinbruckmühl,55528
+Oder-Spree,62628
+Grassau,41728
+Landkreis Nienburg/Weser,62728
+Schwindegg,940828
+Hattingen,162828
+Flembach,62828
+Gatterbauer,55928
+Ebner,63138
+Halle (Saale),62638
+Chieming,941738
+Prignitz,62738
+Dahlem,55738
+Landkreis Neuwied,62348
+Landkreis Erlangen-Höchstadt,62448
+Landkreis Cham,62548
+Landkreis Oldenburg,62648
+Vachendorf,941748
+Krefeld,62748
+Winterhausen,163058
+Königsbach-Stein,63058
+Büdingen,55158
+Kreis Minden-Lübbecke,62358
+Landkreis Starnberg,62458
+Landkreis Wolfenbüttel,62558
+Bremerhaven,62658
+Johannisthal,55758
+Eberstalzell,63168
+Lahn-Dill-Kreis,62368
+Landkreis Gotha,62468
+ Trainingszentrum Wels,162568
+Landkreis Bernkastel-Wittlich,62668
+Grillpalser,56668
+Freiburg im Breisgau,62768
+Annaburger Heide,56768
+Elchingen,941078
+Attendorn,163178
+Blumenviertel,55278
+Landkreis Bayreuth,62378
+Wuppertal,62478
+Köln,62578
+Landkreis Fürth,62778
+Gosen-Neu Zittau,55778
+17,61978
+Osterberg,941088
+Angerteich,63088
+Landkreis Rastatt,62388
+Weiherfeld-Dammerstock,63388
+Maxvorstadt,56388
+Oberhavel,62488
+Landkreis Sömmerda,62588
+Heyner GmbH,57588
+Haag in Oberbayern,940688
+Ruhpolding,941688
+Siegl im Stein,56788
+Landkreis Unterallgäu,62398
+Knielingen,63398
+Landkreis Landsberg am Lech,62498
+Alt-Radebeul,55498
+Kassel,62598
+Landkreis Germersheim,62698
+Thermo Fisher Scientific Messtechnik GmbH,55898
+Breittobel,62998
+Lauf an der Pegnitz,163109
+Heinrich-Heine-Gymnasium,940209
+Oldenburg,62409
+Datteln,63509
+Landkreis Ansbach,62609
+Kirchdorf,940709
+Landkreis Regen,62709
+Neuendorf,55119
+Ilm-Kreis,62419
+Wetteraukreis,62519
+Bezirk St. Pölten,63619
+Zweibrücken,62719
+26,63129
+Metternich,55129
+Landkreis Harz,62429
+Wahlmüller,55529
+Passau,62629
+Marquartstein,941729
+Velen,162729
+Bischofswiesen,941829
+Sprockhövel,162829
+Bauernkrapfen Schleiferei,55929
+Grasbauer,63139
+Kirchheim,162339
+Saale-Orla-Kreis,62339
+Düsseldorf,62539
+Altenmarkt an der Alz,941639
+Burgenlandkreis,62639
+Grabenstätt,941739
+Landkreis Rhön-Grabfeld,62739
+Kaufbeuren,62349
+Bezirk Gmunden,63349
+Leverkusen,62449
+Alte Deponie,63449
+Leipzig,62649
+Bergen,941749
+Dinsheim,62749
+2,63849
+Stein,63059
+Kleingartenverein Roßthaler Höhe,162359
+Börde,62359
+Marchtrenk,63359
+Bremen,62559
+Fridolfing,941659
+Salzgitter,62659
+Ziemetzer,56659
+Niederschöneweide,55759
+Heldenstein,940859
+Ried im Traunkreis,63169
+Potsdam,62369
+Heimbach,162469
+Landkreis Neu-Ulm,62469
+Landkreis Cochem-Zell,62569
+Landkreis Goslar,62669
+Zimmerberger,56669
+Großbeeren,55769
+Lohkirchen,940969
+Kellmünz a.d.Iller,941079
+Olpe,163179
+Kreis Gütersloh,62379
+Grötzingen,63379
+Saarpfalz-Kreis,62579
+Toffelsteich,55579
+Landkreis Birkenfeld,62679
+Velbert,56679
+Kreis Coesfeld,62779
+Spreenhagen,55779
+Hansekontor,56779
+Illertissen,941089
+Landkreis Donau-Ries,62389
+Innenstadt-West,63389
+Schwabing-West,56389
+Kreis Viersen,62489
+Hof,62589
+Kleiner Storkower Stadtforst,57589
+Landkreis Ammerland,62689
+Narrhammer,56789
+Landkreis Osterholz,62399
+Durlach,63399
+Hamm,62499
+Serkowitz,55499
+Wismar,62599
+Solingen,62699
+Halle (Saale),62638
+Hagen,1800297
+Reutlingen,2772661
+Bergisch Gladbach,173103
+Moers,58623
+Iserlohn,1800165
+Esslingen am Neckar,2792882
+Landkreis Reutlingen,2796980
+Hanau,535895
+Villingen-Schwenningen,1242298
+Flensburg,27020
+Lüdenscheid,168563Charlottenburg-Wilmersdorf, 404538
+Charlottenburg,110126
+Friedrichshain-Kreuzberg,55764
+Berlin-Kreuzberg,55765
+Berlin-Friedrichshain,55763
+Berlin-Lichtenberg,3133660
+Alt-Hohenschönhausen,409203
+Neu-Hohenschönhausen,413420
+Marzahn-Hellersdorf,164712
+Mitte,16566
+Wedding,614445865
+Neukölln,409213
+Pankow,407712
+Prenzlauer Berg,407713
+Weißensee,408308
+Reinickendorf,16328
+Spandau,408310
+Steglitz,55735
+Zehlendorf,n3961281931
+Tempelhof-Schöneberg,158437
+Tempelhof,162894
+Köpenick,409209
+Berlin-Treptow-Köpenick,3133653
+Treptow-Köpenick,55754
+Berlin-Tempelhof,162894
