@@ -185,7 +185,6 @@ Salzlandkreis,62502
 Oer-Erkenschwick,63502
 Altmarkkreis Salzwedel,62602
 Greßweiler,62702
-Neukölln,162902
 Nideggen,163312
 Rems-Murr-Kreis,62412
 Koblenz,62512
@@ -318,6 +317,7 @@ Barnim,62553
 Landkreis Südliche Weinstraße,62653
 Heiligenberg,62753
 Marienfelde,55753
+Berlin-Marienfelde,55753
 Bezirk Kirchdorf,63163
 Greifswald,62363
 Inden,162463
@@ -331,6 +331,7 @@ Oberbergischer Kreis,62373
 Hürth,162473
 Saalekreis,62473
 Buckow,162573
+Berlin-Buckow,162573
 Frankenthal (Pfalz),62573
 Röttingen,162673
 Landkreis Osnabrück,62673
@@ -650,6 +651,7 @@ Sonderhofen,162637
 Landkreis Hersfeld-Rotenburg,62637
 Donnersbergkreis,62737
 Lichterfelde,55737
+Berlin-Lichterfelde,55737
 Rattenkirchen,940837
 Berchtesgaden,941837
 Nöttingen,63247
@@ -890,7 +892,7 @@ Prenzlauer Berg,407713
 Weißensee,408308
 Reinickendorf,16328
 Spandau,408310
-Steglitz,55735
+Berlin-Steglitz,55735
 Zehlendorf,n3961281931
 Tempelhof-Schöneberg,158437
 Tempelhof,162894
@@ -899,3 +901,6 @@ Berlin-Treptow-Köpenick,3133653
 Treptow-Köpenick,55754
 Berlin-Tempelhof,162894
 Alt-Mariendorf,n3884823930
+Berlin-Lichtenrade,n3858390219
+Lichtenrade,n3858390219
+Berlin-Neukölln,3133648
