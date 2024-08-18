@@ -1,0 +1,440 @@
+#!/usr/bin/env bash
+#
+# getcodes
+# Version: Look at the first constant definitions below!
+#
+# History:   2023-03-18, 2023-03-19, 2023-09-09, 2024-08-10, 2024-08-18
+#
+# Short description: data collector
+#
+# Project Description:
+#   en: Retrieves the IDs which 'wetter.de' uses for towns.
+#   de: Ermittelt die IDs, die 'wetter.de' für Orte verwendet.
+#
+# The web page addresses are looking like this: https://www.wetter.de/wetter/r/62782
+#
+# In this web address 62782 stands for a location. getcodes, this
+# program, loops over a large amount of numbers and reads the location
+# name in those web pages "wetter.de" delivers.
+#
+# Internal parameters:
+#
+#  $first          - Very first ID to check in this session.
+#  $last           - Very last ID to check in this session.
+#  $interval       - Amount of requests to server before pausing.
+#  $abfragepause   - Time in seconds to pause for preventing the effect
+#                    of a Denial of Service attac. (DoS)
+#
+# Zuordung der Feldnamen aus der Datei 'auftrag' zu den internen Parametern:
+#
+#  $first          <- Start
+#  $last           <- Stop
+#  $interval       <- Interval, Portion*, Abfrageportion*
+#  $abfragepause   <- Pause, Abstand
+#
+# Usage:
+# ./getcodes 
+#
+# Dependencies:
+# - 
+#
+# Author:    Bernd Storck
+# Contact:   https://www.facebook.com/BStLinux/
+#
+
+
+# > Value settings: < =======================================================
+
+# > Constants: < ------------------------------------------------------------
+
+PROG_NAME="Web Scraper for 'wetter.de'"
+ORIGINAL_SCRIPT_NAME="getcodes"
+CURRENT_SCRIPT_NAME="${0##*/}"
+SCRIPT_VERSION="2.0.1 / 2024-08-18"
+JOB_DEFINITION_FILE="./auftrag"
+if command -v update-alternatives > /dev/null; then
+  EDITOR="$(update-alternatives --get-selections | grep '^editor' | tr -s ' ' | cut -d' ' -f3)"
+fi
+
+
+### Define the language for the messages of this script: #####
+LANG_PREFIX=""
+case "${LANG::2}" in
+  de)
+    UI_LANG="Deutsch"
+    # PROG_TITLE="$CURRENT_SCRIPT_NAME -- Debian/Ubuntu Aktualisierungsprogramm (Version $PROG_VERSION)"
+    PARAMETER_LIST_TITLE="Mögliche Aufrufparameter"
+    NOT_APPLICABLE="nicht verfügbar"
+    ;;
+  en)
+    UI_LANG="English"
+    PARAMETER_LIST_TITLE="Possible parameters"
+    NOT_APPLICABLE="N/A"
+    ;;
+  fr)
+    UI_LANG="Francais"
+    PARAMETER_LIST_TITLE="Paramètres d'appel possibles"
+    NOT_APPLICABLE="pas disponible"
+    ;;
+  *)
+    UI_LANG="English"
+    LANG_PREFIX="LANG=C"
+    PARAMETER_LIST_TITLE="Possible parameters"
+    NOT_APPLICABLE="not applicable / nothing found"
+    ;;
+esac
+
+
+### SELF DOCUMENTATION: VERSION INFOS #########################
+case "$1" in
+  --version|-V)
+    echo -n "$CURRENT_SCRIPT_NAME ("
+    if [ "$CURRENT_SCRIPT_NAME" != "$ORIGINAL_SCRIPT_NAME" ]; then
+      echo -n "$PROG_NAME "
+    fi
+    echo "$SCRIPT_VERSION)"
+    exit 0
+    ;;
+ -v|-\#)
+    echo "$SCRIPT_VERSION"
+    exit 0
+    ;;
+esac
+
+
+# Setting default values:
+interval="${3:-200}"
+abfragepause="${4:-12}"
+minimum_minutes=4
+maximum_minutes=8
+
+# > Functions: < ============================================================
+
+usage () {  
+  get_terminal_width
+  set_default_programs
+  # Utilize the FORMATTER to format the usage message  
+  {  
+  cat <<EOF
+$ORIGINAL_SCRIPT_NAME $SCRIPT_VERSION
+    "$ORIGINAL_SCRIPT_NAME" sammelt Daten von einer Website.
+
+Ermittelt die Ortskennzahlen, die 'wetter.de' verwendet. Die jeweilige Ortskennzahl taucht in der Webadressen auf, mit welcher die Wetterprognose für einen Ort von Server abgerufen wird.
+
+Die Webseitenadressen sehen so aus: https://www.wetter.de/wetter/r/62782
+
+In dieser Webadresse steht 62782 für einen Standort.
+
+getcodes, dieses Programm, durchläuft eine große Anzahl von Zahlen, richtet damit eine Anfrage an den Server von 'wetter.de' und liest schließlich, falls 'wetter.de' daraufhin eine Wetterseite zurückgibt, aus dieser den Standortnamen aus. Als Ergebnis erzeugt getcodes eine Liste in welcher Ortsnamen, die 'wetter.de' kennt den Ortskennzahlen zugeordnet sind, welche 'wetter.de' verwendet.
+
+ AUFRUFFORMEN
+   $CURRENT_SCRIPT_NAME [first] [last] [interval] [abfragenabstand]
+   $CURRENT_SCRIPT_NAME -f
+   $CURRENT_SCRIPT_NAME -f <dateiname>
+
+
+ OPTIONEN
+   -h, --help        Zeigt diese Hilfe an und beendet das Script.
+   -f, --file        Liest die Startparameter statt von der Kommandozeile aus einer
+                     Datei. (Standardnamen: "auftrag" und "job.conf")
+
+ ARGUMENTE
+   first             Der Zahlenwert, bei dem die Suche beginnt. (Standard: )
+   last              Der Zahlenwert, bei dem die Suche endet. (Standard: )
+   interval          Datei der potentiellen Orte. (Standard: 200)
+   abfragepause      Pausendauer in Sekunden. (Standard: 12)
+EOF
+  } | $FORMATTER
+}
+
+
+get_terminal_width () {
+  if command -v tput &> /dev/null; then
+    TERMINAL_WIDTH=$(tput cols)
+  elif command -v stty &> /dev/null; then
+    TERMINAL_WIDTH=$(stty size | cut -d" " -f2)
+  else
+    echo "FEHLER: Die Terminalbreite konnnte nicht ermittelt werden." >&2
+    TERMINAL_WIDTH=0
+  fi
+  TERMINAL_WIDTH=$((TERMINAL_WIDTH - 1))
+}
+
+
+function set_default_programs {
+# Bestimmt den Pager und Editor zur Verwendung mit update-alternatives,  
+# wenn update-alternatives nicht verfügbar ist, wird selbst nach einem  
+# Pager und Editor gesucht.  
+#  
+# Zusätzlich wird ein Programm zur Ausgabeformatierung ausgewählt 
+
+# Determines the pager and editor to use with update-alternatives,
+# but if update-alternatives is not available, searchs by itself for
+# a pager and editor.
+#
+# Additionally selects a program to format output
+
+  if command -v update-alternatives > /dev/null; then
+
+    EDITOR="$( update-alternatives --get-selections | grep '^editor'  | tr -s ' ' | cut -d' ' -f3  )"
+    PAGER="$(  update-alternatives --get-selections | grep -w 'pager' | tr -s ' ' | cut -d' ' -f3 )"
+
+  else
+    EDITOR="vi"  # Fallback program if no other editor is available.
+    for i in nano joe jupp jed vim nvim ne kak vis leafpad gedit kwrite pluma scite subl geany kate emacs;
+    do
+      if command -v "$i" > /dev/null; then
+        EDITOR="$i"
+        break
+      fi
+    done
+
+    PAGER="cat"  # Fallback program if no pager is available.
+    for i in most less more;
+    do
+      if command -v "$i" > /dev/null; then
+        PAGER="$i"
+        break
+      fi
+    done
+
+  fi
+  
+  # Select formatter based on availability:
+  if command -v reformat > /dev/null; then
+    FORMATTER="reformat -l 1 -w $TERMINAL_WIDTH"
+  elif command -v fold > /dev/null; then
+    FORMATTER="fold -s -w $TERMINAL_WIDTH"
+  elif command -v fmt > /dev/null; then
+    FORMATTER="fmt -w  $TERMINAL_WIDTH"
+  else
+    FORMATTER="cat"  # Fallback if no formatter is available.
+  fi
+}
+
+
+get_mission_parameter () {
+  cut -d' ' -f2 <<< "$1"
+}
+
+
+check_parameter () {
+
+  local message
+  local field
+  local value
+
+  # Lese aus der Pipe mit einem Timeout von einer Sekunde:
+  read -t 1 -r -u 3 message  # Lesen aus der Pipe.
+
+  if [ -n "$message" ]; then
+
+   # value="$(cut -d':' -f2 <<< "$message")"
+     value="${message##*:}"
+
+     if grep -E '[0-9]+' <<< "$value" > /dev/null; then  # Wenn der Wert eine Zahl ist ...
+
+         field="${message%:*}"  # Aequivalent zu: field="$(cut -d':' -f1 <<< "$message")"
+
+         case "$field" in
+           last|l)  # Festlegen, welches der letzte abzufragende Satz sein soll.
+             if [ "$value" -ne "$last" ]; then
+               last="$value"
+               echo "===== Letzter abzufragender Satz geändert zu $last. =====" > /dev/stderr
+             fi
+             ;;
+           pause|p|abfrage*)  # Die Abfragepausenlaenge aendern.
+             if [ "$value" -ne "$abfragepause" ]; then
+               abfragepause="$value"
+               echo "===== Abfragepause geändert zu $abfragepause Sekunden. =====" > /dev/stderr
+             fi
+             ;;
+           interval|i)  # Die Anzahl der en block durchzufuehrenden Abfragen festlegen.
+             if [ "$value" -ne "$interval" ]; then
+               interval="$value"
+               echo "===== Interval geändert auf $interval Abfragen. =====" > /dev/stderr
+             fi
+             ;;
+           maximum_minutes|minutes|m)  # Die maximale Dauer der Pause nach jedem Block festlegen.
+             if [ "$value" -ne "$maximum_minutes" ]; then
+               maximum_minutes="$value"
+               echo "===== Änderung: Nach jedem Abfrageblock maximal $maximum_minutes Minuten anhalten. =====" > /dev/stderr
+             fi
+             ;;
+           halt|h|go|g)  # Die Abfragen unterbrechen, anhalten bis das Signal zum Weitermachen gegeben wird.
+             if [ "${field:0:1}" = 'h' ] && [ "$value" -lt 1 ]; then
+               echo "===== Die Ausführung wurde angehalten. Warte auf Signal zum Weitermachen. =====" > /dev/stderr
+               hold_and_start
+             elif [ "${field:0:1}" = 'h' ] && [ -n "$value" ] || [ "$value" != '' ]; then
+               echo "===== Die Ausführung wird für $value Sekunden unterbrochen. =====" > /dev/stderr
+               sleep "$value"  # Wert in Sekunden
+             fi
+             ;;
+         esac
+      fi
+  fi
+}
+
+
+hold_and_start () {
+  local message
+  local field
+  local start
+
+  while [ -z "$start" ]; do
+    sleep 1
+    # Lese aus der Pipe mit einem Timeout von einer Sekunde:
+    read -t 1 -r -u 3 message  # Lesen aus der Pipe.
+    field="${message%:*}"      # Aequivalent zu: : field="$(cut -d':' -f1 <<< "$message")"
+    [ "${field:0:1}" = 's' ] && start=true
+  done
+  echo "===== Die Ausführung wird jetzt fortgesetzt. =====" > /dev/stderr
+}
+
+
+terminate () {
+  printf "\nVerarbeitungsende, da der angegebene Endwert %s überschritten wurde.\n" "$last"
+  exit 0
+}
+
+
+calc_average_centigrades () {
+# Calculates the avagage temperature in degrees Celsius.
+
+  summanden="$(sed -En '/^[0-9]+°/s/^([0-9]+)°/\1/p' page)"
+
+  while read -r summand; do
+    summe="$(( summe + summand ))"
+  done  <<< "$summanden"
+
+  divisor="$(wc -l <<< "$summanden")"
+
+  echo "$(( summe / divisor ))"
+}
+
+
+sleepRandomMinutes () {
+
+# Diese Funktion generiert eine zufällige ganze Zahl zwischen den
+# angegebenen Werten `low` und `high` und unterbricht dann den
+# Programmfluss für so viele Minuten.
+#
+# Damit soll verhindert werden, dass die Abfragen, die dieses Programm an
+# einen Webserver richtet, wie ein "Denial of Service"-Angriff (DoS) wirken.
+
+  low="$1"
+  high=$(( ($2 + 1) - low ))
+  pause="$( dc -e "2 k $RANDOM 32767 / $high * $low + p" | sed -E 's:^(.*)\..*$:\1:' )"
+  echo -e "\n##### $(date +"%Y-%m-%d, %R"): Die Abfrage pausiert jetzt für $pause Minuten. #####\n"
+  sleep "${pause}m"
+}
+
+
+# > main < ============================================================
+
+# > Call parameter Analysis: < ----------------------------------------
+
+case "$1" in
+  --help|-h|-help|--hilf|-hilf|"")
+    usage
+    exit 0
+esac
+
+
+# Set default value for the job definition file's name:
+[ -z "$job_definition_file" ] && job_definition_file="auftrag"
+
+if [ "$1" = '-f' ] || [ "$1" = '--file' ]; then
+  while read -r line; do
+    case "$(grep -Eio '^(Start|Stop|Abstand|Pause|Interval|Portion|Abfrageportion)' <<< "$line")" in
+      [Ss]tart)
+        first="$(get_mission_parameter "$line")"
+        ;;
+      [Ss]top)
+        last="$(get_mission_parameter "$line")"
+        ;;
+      [Aa]bstand|[Pp]ause)
+        abfragepause="$(get_mission_parameter "$line")"
+        ;;
+      [Ii]nterval|[Pp]ortion|[Aa]bfrageportion)
+        interval="$(get_mission_parameter "$line")"
+        ;;
+    esac
+  done < "$job_definition_file"
+else
+  first="$1"
+  last="$2"
+fi
+
+# Öffnet eine Pipe, um eine Änderung der Pausenlänge
+# von einem anderen Terminal aus zu übernehmen:
+rm -rf /tmp/gc_message
+touch /tmp/gc_message
+exec 3< /tmp/gc_message
+
+echo -e "\nStarts with $first: ends with $last\n$(date)\n" >> locations
+
+# The retrieval should pause sometimes, therefore the total numbers to
+# retrieve are split in portions. After every portion the retrieval will
+# pause for a randomized amount of minutes.
+
+
+for i in $(seq "$first" "$interval" "$last"); do
+
+  loopEnd=$(( i + interval - 1 ))
+  if [ "$loopEnd" -gt "$last" ]; then
+    terminate
+  fi
+
+  for j in $(seq "$i" "$loopEnd"); do
+
+    data="$(curl -s "https://www.wetter.de/wetter/r/$j")"
+
+    if [ -n "$data" ] && ! grep -F 'Error 503' <<< "$data > /dev/null"; then
+      ( output="$j:"
+
+        selected_lines="$(html2text -utf8 <<< "$data" | grep -m1 -EB 999 '={4,}')"  # lines above ==========...
+
+        if target_line="$(grep -F 'Home >Welt >Wetter' <<< "$selected_lines")"; then
+          # Line type: "Home >Welt >Wetter ..."
+          location_name="$(sed -E 's:^Home >Welt >Wetter (.*) >$:\1:' <<< "$target_line")"
+        elif target_line="$(grep -E '^(\*){5,} Wetter ' <<< "$selected_lines")"; then
+          # Line type: "****** Wetter Landkreis Rottweil, Baden-Württemberg ******"
+          location_name="$(sed -E 's:^\*{5,} Wetter (.*) \*{5,}$:\1:' <<< "$target_line")"
+        fi
+        output="$output $location_name"
+
+        if [[ ! "$output" =~ [0-9]{5,}": …" ]]; then
+          printf "%s\n" "$output"
+          case "$(grep -o ' [A-ZÄÖÜ][a-zäöü]+$' <<< "$location_name")" in
+            Frankreich)
+              printf "%s\n" "$output" >> locations-Frankreich ;;
+          esac
+        fi
+
+      ) >> locations
+    elif  error="$(grep -F 'Error 503' <<< "$data")"; then
+      : # echo "Server-Fehler: $error"
+    fi
+
+    # Status messages as progress indicator:
+    echo "$j (aktuell) / Start: $first / End: $last  # Abfrageabstand=$abfragepause Sekunden" > /dev/stdout
+
+    sleep "$abfragepause"   # To prevent DoS effect.
+
+    check_parameter
+  done
+
+  sleepRandomMinutes "$minimum_minutes" "$maximum_minutes"
+
+done
+
+
+exit 0
+
+# How to generate random single digit number using shell
+#
+# while RANDOM is (from man bash) a random integer between 0 and 32767
+# that means the possibility of some digits is very slightly lower, if
+# that matters. For numbers 0-7, it is 100 * 3277 / 32767 ≈ 10.00092 %.
+# For numbers 8 and 9, 100 * 3276 / 32767 ≈ 9.99786 %
