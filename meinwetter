@@ -47,8 +47,8 @@ PROG_NAME="MeinWetter"
 ORIGINAL_SCRIPT_NAME="meinwetter"
 CURRENT_SCRIPT_NAME="${0##*/}"
 # TITLE="$CURRENT_SCRIPT_NAME"
-PROG_VERSION="1.5.0"
-VERSIONS_TIME_STAMP="2024-08-30, 08:17:07"  # date '+%Y-%m-%d, %T'
+PROG_VERSION="1.5.1"
+VERSIONS_TIME_STAMP="2024-08-30, 08:24:46"  # date '+%Y-%m-%d, %T'
 
 
 # > Functions: < ============================================================
@@ -254,7 +254,7 @@ fetch_times_with_degrees () {
               }
               ')"
 
-# echo "$times_and_following_line" | less; exit
+# echo "DEBUG: $times_and_following_line" | less; exit
 
   i=0
   for data in $times_and_following_line; do
@@ -284,9 +284,6 @@ fetch_degrees () {
   for (( i=0; i<=last; i++ )); do
     temperatures[$i]="$(cut -d'-' -f2 <<< "${times_with_degrees[$i]}")"
   done
-
-# echo "${#temperatures[@]}"; exit
-# echo -ne "Summanden:\n$summanden" | cat -A
 }
 
 
@@ -300,8 +297,8 @@ define_output_phrases () {
     output_title="Das Wetter in"
     label_current_temperature="Aktuelle Temperatur"
     label_average_temperature="Durchschnittliche Temperatur"
-  # echo -n "Aktuelle Temperatur: $(cut -d',' -f2 <<< "${temperatures[0]}") °C / "
-  # echo "Durchschnittliche Temperatur: $average_degrees °C"
+  # echo -n "DEBUG: Aktuelle Temperatur: $(cut -d',' -f2 <<< "${temperatures[0]}") °C / "
+  # echo "DEBUG Durchschnittliche Temperatur: $average_degrees °C"
     sunrise_praefix="Sonnenaufgang:"
     sunset_praefix="Sonnenuntergang:"
     sunrise_sunset_postfix="Uhr"
@@ -362,7 +359,7 @@ while [ -z "$numbers" ]; do
   if [ -z "$1" ] || [ "$matching_input" -ne 0 ]; then
     echo -e "${prompt}$cancel_info"
     read -rp "Eingabe: " ort
-    # echo "$ort"
+    # echo "DEBUG: $ort"
   fi
 
   # was if [ "$ort" = "x" ] || [ "$ort" = "exit" ] || [ "$ort" = "q" ] || [ "$ort" = "quit" ]; then
@@ -395,7 +392,7 @@ else
   locationID="$numbers"
 fi
 
-region="$(grep "$numbers" regions-de | cut -d',' -f1 | xargs)"
+region="$(grep -m1 ",$numbers$" regions-de | cut -d',' -f1 | xargs)"
 
 weather_data="$(curl -s "https://www.wetter.de/wetter/${db_ID}/$locationID" | html2text -utf8 -width 111)"
 
@@ -422,7 +419,7 @@ fi
 fetch_degrees "$weather_data"
 calc_average_centigrades; # exit
 
-# echo -e "\n\n --> ${temperatures[0]} <--"
+# echo -e "\n\nDEBUG:\n--> ${temperatures[0]} <--"
 # echo -e "${temperatures[@]}"
 # exit
 
