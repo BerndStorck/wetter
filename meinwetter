@@ -408,6 +408,9 @@ output="$( grep -m1 -EA 1 '\*{4,} Heute' <<< "$weather_data" | tail -n 1 )"
 #            grep -Ev "^\[One of:|$ort"
 #          )"
 
+
+# > Output: < ---------------------------------------------------------------
+
 echo "===== $output_title $ort ====="
 if [ "$UILANG" != "Deutsch" ] && command -v trans > /dev/null; then
   echo "$output" | trans -brief de:en
