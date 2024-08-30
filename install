@@ -1,11 +1,40 @@
-#! /usr/bin/bash
+#!/usr/bin/env bash
 #
-# install 1.0.0, 2023-03-22
+# install 
+# Version: Look at the first constant definitions below!
 #
-# Installiert die Datendateien fuer das Skript "meinwetter".
+# Project Description:
+#   Installiert die Datendateien fuer das Skript 'meinwetter'.
 #
-# Bernd Storck, https://www.facebook.com/BStLinux/
+# Kurzbeschreibung: Installations-Script
 #
+# Usage:
+# 
+# Dependencies:
+# - 'apt', 'apt-get' or 'aptitude' 
+#
+# Author:    Bernd Storck
+# Contact:   https://www.facebook.com/BStLinux/
+#
+# History:   2023-03-22, 2023-03-24, 2024-08-18
+#
+# Copyright: 2024, Bernd Storck
+# License:   GNU General Public License 3.0
+#
+
+# > Value settings: < =======================================================
+
+# > Constants: < ------------------------------------------------------------
+
+PROG_NAME="Installer fuer meinwetter"
+ORIGINAL_SCRIPT_NAME="install"
+CURRENT_SCRIPT_NAME="${0##*/}"
+# TITLE="$CURRENT_SCRIPT_NAME"
+PROG_VERSION="1.1.2"
+# VERSIONS_TIME_STAMP="2024-08-04, 07:07:22"  # date '+%Y-%m-%d, %T'
+
+
+# > Functions: < ============================================================
 
 function color_on  { echo -en "\e[1;93m"; }
 function color_off { echo -en "\e[0;m";   }
@@ -55,6 +84,9 @@ function install_calculator {
     break
   done
 }
+
+
+# > main < ============================================================
 
 determine_installer
 echo "installer is: $installer"
