@@ -17,7 +17,7 @@
 # Contact:   https://www.facebook.com/BStLinux/
 #
 # History:   2023-03-18, 2023-03-20, 2023-03-21, 2023-03-23, 2023-03-25,
-#            2023-03-26, 2024-07-28, 2024-07-30, 2024-08-04
+#            2023-03-26, 2024-07-28, 2024-07-30, 2024-08-04, 2024-08-30
 #
 # Copyright: 2024, Bernd Storck
 # License:   GNU General Public License 3.0
@@ -47,8 +47,8 @@ PROG_NAME="MeinWetter"
 ORIGINAL_SCRIPT_NAME="meinwetter"
 CURRENT_SCRIPT_NAME="${0##*/}"
 # TITLE="$CURRENT_SCRIPT_NAME"
-PROG_VERSION="1.4.0"
-VERSIONS_TIME_STAMP="2024-08-04, 07:07:22"  # date '+%Y-%m-%d, %T'
+PROG_VERSION="1.5.0"
+VERSIONS_TIME_STAMP="2024-08-30, 08:17:07"  # date '+%Y-%m-%d, %T'
 
 
 # > Functions: < ============================================================
@@ -189,24 +189,24 @@ calc_average_centigrades () {
 }
 
 
-get_sunrise_sunset() {  
-    local block  
-    
+get_sunrise_sunset() {
+    local block
 
-    # Block extrahieren, der die Wetterdaten enthaelt:  
-    block=$(grep -E -A 999 "\bWetter heute\b" <<< "$1" | grep -E -m2 -B 999 '^\*{4,}')  
 
-    # Zeile mit Sonnenaufgang und Sonnenuntergang extrahieren:  
-    line=$(grep -F 'Sonnenaufgang' <<< "$block")  
+    # Block extrahieren, der die Wetterdaten enthaelt:
+    block=$(grep -E -A 999 "\bWetter heute\b" <<< "$1" | grep -E -m2 -B 999 '^\*{4,}')
 
-    # Zeiten aus der Zeile extrahieren:  
-    read -r sunrise sunset <<< "$(grep -Eo '[0-9]{2}:[0-9]{2}' <<< "$line" | tr '\n' ' ')"  
+    # Zeile mit Sonnenaufgang und Sonnenuntergang extrahieren:
+    line=$(grep -F 'Sonnenaufgang' <<< "$block")
 
-    # # Pruefen, ob die Zeiten erfolgreich extrahiert wurden:  
-    # if [[ -z "$sunrise" || -z "$sunset" ]]; then  
-    #   echo "FEHLER: Sonnenaufgang oder Sonnenuntergang konnte nicht gefunden werden."  
-    #   return 1  
-    # fi  
+    # Zeiten aus der Zeile extrahieren:
+    read -r sunrise sunset <<< "$(grep -Eo '[0-9]{2}:[0-9]{2}' <<< "$line" | tr '\n' ' ')"
+
+    # # Pruefen, ob die Zeiten erfolgreich extrahiert wurden:
+    # if [[ -z "$sunrise" || -z "$sunset" ]]; then
+    #   echo "FEHLER: Sonnenaufgang oder Sonnenuntergang konnte nicht gefunden werden."
+    #   return 1
+    # fi
 
 }
 
@@ -395,6 +395,7 @@ else
   locationID="$numbers"
 fi
 
+region="$(grep "$numbers" regions-de | cut -d',' -f1 | xargs)"
 
 weather_data="$(curl -s "https://www.wetter.de/wetter/${db_ID}/$locationID" | html2text -utf8 -width 111)"
 
@@ -411,7 +412,7 @@ output="$( grep -m1 -EA 1 '\*{4,} Heute' <<< "$weather_data" | tail -n 1 )"
 
 # > Output: < ---------------------------------------------------------------
 
-echo "===== $output_title $ort ====="
+echo "===== $output_title $ort ($region) ====="
 if [ "$UILANG" != "Deutsch" ] && command -v trans > /dev/null; then
   echo "$output" | trans -brief de:en
 else
